@@ -23,7 +23,7 @@
             }
 
             Id = Guid.NewGuid();
-            TypeName = typeName;
+            TypeName = typeName.Trim();
 
             ApprovedTypes = new List<ApprovedMeasuringInstrumentType>();
         }
