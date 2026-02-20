@@ -1,0 +1,28 @@
+﻿namespace PkrAssistant.Domain
+{
+    public class MeasuringInstrumentType
+    {
+        public Guid Id { get; private set; }
+
+        public string TypeName { get; private set; }
+
+        // Навигационное свойство
+        public ICollection<ApprovedMeasuringInstrumentType> ApprovedTypes { get; private set; } 
+
+        // Для EF
+        public MeasuringInstrumentType(){}
+
+        public MeasuringInstrumentType(string typeName)
+        {
+            if (string.IsNullOrWhiteSpace(typeName) == true)
+            {
+                throw new ArgumentException("Наименование типа СИ не может быть пустым", nameof(typeName));
+            }
+
+            Id = Guid.NewGuid();
+            TypeName = typeName;
+
+            ApprovedTypes = new List<ApprovedMeasuringInstrumentType>();
+        }
+    }
+}
