@@ -1,5 +1,8 @@
 ﻿namespace PkrAssistant.Domain
 {
+    /// <summary>
+    /// Тип средства измерений
+    /// </summary>
     public class MeasuringInstrumentType
     {
         public Guid Id { get; private set; }
