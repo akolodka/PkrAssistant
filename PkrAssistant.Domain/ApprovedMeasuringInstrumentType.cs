@@ -47,7 +47,7 @@
             }
 
             Id = Guid.NewGuid();
-            RegistrationNumber = registrationNumber;
+            RegistrationNumber = registrationNumber.Trim();
 
             VerificationIntervalYears = verificationIntervalYears;
             MeasuringInstrumentTypeId = measuringInstrumentTypeId;
