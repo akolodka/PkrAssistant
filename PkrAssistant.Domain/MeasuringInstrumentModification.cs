@@ -23,7 +23,7 @@
         public MeasuringInstrumentModification(
             string name,
             Guid approvedMeasuringInstrumentTypeId,
-            int? verificationIntervalYears)
+            int? verificationIntervalYears = null)
         {
             if (string.IsNullOrWhiteSpace(name) == true)
             {
