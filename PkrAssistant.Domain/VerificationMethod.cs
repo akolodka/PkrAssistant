@@ -6,15 +6,13 @@
     public class VerificationMethod
     {
         public Guid Id { get; private set; }
-
         public string Name { get; private set; }
-
         public string CodeName { get; private set; }
 
         // Внешний ключ
         public Guid ApprovedMeasuringInstrumentTypeId { get; private set; }
 
-        // Для EFCore
+        // Для EF
         private VerificationMethod() { }
 
         public VerificationMethod(

@@ -6,7 +6,6 @@
     public class MeasuringInstrumentType
     {
         public Guid Id { get; private set; }
-
         public string TypeName { get; private set; }
 
         // Навигационное свойство

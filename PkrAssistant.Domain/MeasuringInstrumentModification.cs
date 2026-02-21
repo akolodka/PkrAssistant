@@ -6,9 +6,7 @@
     public class MeasuringInstrumentModification
     {
         public Guid Id { get; private set; }
-
         public string Name { get; private set; }
-
         public int? VerificationIntervalYears { get; private set; }
 
         // Внешний ключ
