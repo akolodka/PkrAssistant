@@ -16,7 +16,7 @@
         public ApprovedMeasuringInstrumentType ApprovedType { get; private set; }
 
         // для EF
-        public MeasuringInstrumentModification() {}
+        private MeasuringInstrumentModification() {}
 
         public MeasuringInstrumentModification(
             string name,

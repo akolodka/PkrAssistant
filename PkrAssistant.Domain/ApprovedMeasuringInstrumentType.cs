@@ -21,7 +21,7 @@
         public ICollection<MeasuringInstrument> Instruments { get; private set; }
 
         // Для EF
-        public ApprovedMeasuringInstrumentType() {}
+        private ApprovedMeasuringInstrumentType() {}
 
         public ApprovedMeasuringInstrumentType(
             string registrationNumber, 

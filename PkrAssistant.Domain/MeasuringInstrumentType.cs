@@ -12,7 +12,7 @@
         public ICollection<ApprovedMeasuringInstrumentType> ApprovedTypes { get; private set; } 
 
         // Для EF
-        public MeasuringInstrumentType(){}
+        private MeasuringInstrumentType(){}
 
         public MeasuringInstrumentType(string typeName)
         {
