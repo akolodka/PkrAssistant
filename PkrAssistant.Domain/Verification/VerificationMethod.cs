@@ -1,4 +1,6 @@
-﻿namespace PkrAssistant.Domain.Verification;
+﻿using System;
+
+namespace PkrAssistant.Domain.Verification;
 
 /// <summary>
 /// Методика поверки на средство измерений

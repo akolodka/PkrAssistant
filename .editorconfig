@@ -1,0 +1,12 @@
+root = true
+
+[*.cs]
+
+# Стиль namespace: file-scoped (с точкой с запятой)
+csharp_style_namespace_declarations = file_scoped:warning
+
+# Предпочитать явные модификаторы доступа
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:warning
+
+# Выражения body для методов (по желанию)
+csharp_style_expression_bodied_methods = when_on_single_line:warning

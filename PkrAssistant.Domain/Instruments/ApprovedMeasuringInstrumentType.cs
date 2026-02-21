@@ -1,4 +1,6 @@
-﻿using PkrAssistant.Domain.Verification;
+﻿using System;
+using System.Collections.Generic;
+using PkrAssistant.Domain.Verification;
 
 namespace PkrAssistant.Domain.Instruments;
 

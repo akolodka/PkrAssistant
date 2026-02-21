@@ -1,4 +1,7 @@
-﻿namespace PkrAssistant.Domain.Instruments;
+﻿using System;
+using System.Collections.Generic;
+
+namespace PkrAssistant.Domain.Instruments;
 
 /// <summary>
 /// Тип средства измерений
