@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace PkrAssistant.Domain.Customers;
 
+/// <summary>
+/// Заказчик работ (юридическое лицо)
+/// </summary>
 public class Customer
 {
     public Guid Id { get; private set; }
@@ -49,7 +52,7 @@ public class Customer
         Id = Guid.NewGuid();
         ShortName = shortName.Trim();
 
-        FullName = string.IsNullOrWhiteSpace(fullname)
+        FullName = (string.IsNullOrWhiteSpace(fullname) == true)
             ? shortName.Trim()  
             : fullname.Trim();
 
