@@ -16,7 +16,6 @@
         // Навигационные свойства
         public MeasuringInstrumentType Type { get; private set; }
         public VerificationMethod Method { get; private set; }
-
         public ICollection<MeasuringInstrumentModification> Modifications { get; private set; }
         public ICollection<MeasuringInstrument> Instruments { get; private set; }
 
@@ -45,12 +44,10 @@
             }
 
             Id = Guid.NewGuid();
-
             RegistrationNumber = registrationNumber.Trim();
 
             VerificationIntervalYears = verificationIntervalYears;
             MeasuringInstrumentTypeId = measuringInstrumentTypeId;
-
             VerificationMethodId = verificationMethodId;
 
             Modifications = new List<MeasuringInstrumentModification>();
