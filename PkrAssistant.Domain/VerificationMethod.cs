@@ -33,7 +33,7 @@
 
             if (approvedMeasuringInstrumentTypeId == Guid.Empty)
             {
-                throw new ArgumentException("Идентификатор типа СИ не может быть пустым", nameof(approvedMeasuringInstrumentTypeId));
+                throw new ArgumentException("Идентификатор типа СИ должен быть указан", nameof(approvedMeasuringInstrumentTypeId));
             }
 
             Id = Guid.NewGuid();  
