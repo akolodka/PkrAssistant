@@ -25,7 +25,7 @@
         {
             if (string.IsNullOrWhiteSpace(name) == true)
             {
-                throw new ArgumentException("Наименование модификации должно быть указано", nameof(name));
+                throw new ArgumentException("Наименование модификации не может быть пустым", nameof(name));
             }
 
             if (approvedMeasuringInstrumentTypeId == Guid.Empty) 
