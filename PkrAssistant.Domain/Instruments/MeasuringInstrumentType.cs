@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PkrAssistant.Domain.Instruments;
 
 /// <summary>
-/// Тип средства измерений
+/// Тип средства измерений.
 /// </summary>
 public class MeasuringInstrumentType
 {
