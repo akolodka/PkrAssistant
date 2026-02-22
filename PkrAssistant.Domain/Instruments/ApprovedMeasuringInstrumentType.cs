@@ -5,12 +5,20 @@ using PkrAssistant.Domain.Verification;
 namespace PkrAssistant.Domain.Instruments;
 
 /// <summary>
-/// Утверждённый тип средства измерений
+/// Утверждённый тип средства измерений.
 /// </summary>
 public class ApprovedMeasuringInstrumentType
 {
     public Guid Id { get; private set; }
+
+    /// <summary>
+    /// Уникальный регистрационный номер, присвоенный при утверждении типа средства измерений.
+    /// </summary>
     public string RegistrationNumber { get; private set; }
+
+    /// <summary>
+    /// Межповерочный интервал в годах.
+    /// </summary>
     public int? VerificationIntervalYears { get; private set; }
 
     // Внешние ключи
