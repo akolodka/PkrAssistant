@@ -3,12 +3,16 @@
 namespace PkrAssistant.Domain.Instruments;
 
 /// <summary>
-/// Модификация типа средства измерений
+/// Модификация типа средства измерений.
 /// </summary>
 public class MeasuringInstrumentModification
 {
     public Guid Id { get; private set; }
     public string Name { get; private set; }
+
+    /// <summary>
+    /// Межповерочный интервал в годах (может варьироваться между установленных внутри методики повеки значений).
+    /// </summary>
     public int? VerificationIntervalYears { get; private set; }
 
     // Внешний ключ

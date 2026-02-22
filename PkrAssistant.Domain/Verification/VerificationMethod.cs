@@ -3,12 +3,16 @@
 namespace PkrAssistant.Domain.Verification;
 
 /// <summary>
-/// Методика поверки на средство измерений
+/// Методика поверки на средство измерений.
 /// </summary>
 public class VerificationMethod
 {
     public Guid Id { get; private set; }
     public string Name { get; private set; }
+
+    /// <summary>
+    /// Шифр методики поверки.
+    /// </summary>
     public string CodeName { get; private set; }
 
     // Внешний ключ

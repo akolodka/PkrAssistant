@@ -3,12 +3,16 @@
 namespace PkrAssistant.Domain.Instruments;
 
 /// <summary>
-/// Конкретное средство измерений
+/// Конкретное средство измерений.
 /// </summary>
 public class MeasuringInstrument
 {
     public Guid Id { get; private set; }
     public string SerialNumber { get; private set; }
+
+    /// <summary>
+    /// Межповерочный интервал в годах (может варьироваться между установленных внутри методики повеки значений).
+    /// </summary>
     public int? VerificationIntervalYears { get; private set; }
 
     // Внешний ключ
