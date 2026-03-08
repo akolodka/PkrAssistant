@@ -70,7 +70,10 @@ public class Verifier
     /// </summary>
     public string GetShortName()
     {
-        var firstNameInitial = $"{FirstName[0]}.";
+        // Защита от будущих изменений валидации или тестовых сценариев
+        var firstNameInitial = (string.IsNullOrWhiteSpace(FirstName) == true) 
+            ? string.Empty 
+            :  $"{FirstName[0]}.";
 
         var patronymicInitial = (string.IsNullOrWhiteSpace(Patronymic) == true) 
             ? string.Empty 
