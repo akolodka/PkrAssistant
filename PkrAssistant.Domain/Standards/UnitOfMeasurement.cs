@@ -15,7 +15,7 @@ public class UnitOfMeasurement
     public string Name { get; private set; }
 
     // Для EF
-    private UnitOfMeasurement() { }
+    private UnitOfMeasurement() {}
 
     public UnitOfMeasurement(string name)
     {

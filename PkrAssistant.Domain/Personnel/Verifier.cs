@@ -30,7 +30,7 @@ public class Verifier
     public string Position { get; private set; }
 
     // Для EF
-    private Verifier() { }
+    private Verifier() {}
 
     public Verifier(
         string lastName, 

@@ -46,7 +46,7 @@ public class ReferenceStandard
     public ICollection<Guid> UnitOfMeasurementIds { get; private set; }
 
     // Для EF
-    private ReferenceStandard() { }
+    private ReferenceStandard() {}
 
     public ReferenceStandard(
         string registrationNumber, 
