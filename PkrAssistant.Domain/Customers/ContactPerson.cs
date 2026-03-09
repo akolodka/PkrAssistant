@@ -18,6 +18,11 @@ public class ContactPerson
     public string? Email { get; private set; }
 
     /// <summary>
+    /// Заметка о контактном лице.
+    /// </summary>
+    public string? Note { get; private set; }
+
+    /// <summary>
     /// Является ли контактное лицо приоритетным для связи.
     /// </summary>
     public bool IsPriorityContact { get; private set; }
@@ -29,7 +34,8 @@ public class ContactPerson
         string name, 
         string phone, 
         string? email = null, 
-        bool isPriorityContact = false)
+        bool isPriorityContact = false,
+        string? note = null)
     {
         if (string.IsNullOrWhiteSpace(name) == true)
         {
@@ -66,6 +72,10 @@ public class ContactPerson
             : email.Trim();
 
         IsPriorityContact = isPriorityContact;
+
+        Note = (string.IsNullOrWhiteSpace(note) == true) 
+            ? null 
+            : note.Trim();
     }
 
     /// <summary>
