@@ -27,7 +27,7 @@ public class MeasuringInstrument
     /// <summary>
     /// Состав средства измерений (измерительные блоки).
     /// </summary>
-    public string? Composition {  get; private set; }
+    public string? Composition { get; private set; }
 
     /// <summary>
     /// Межповерочный интервал в годах.
