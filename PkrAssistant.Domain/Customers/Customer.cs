@@ -31,7 +31,9 @@ public class Customer
     /// </summary>
     public string LegalAddress { get; private set; }
 
-    // Навигационное свойство
+    /// <summary>
+    /// Список контактных лиц внутри организации.
+    /// </summary>
     public ICollection<ContactPerson> ContactPersons { get; private set; }
 
     // Для EF
