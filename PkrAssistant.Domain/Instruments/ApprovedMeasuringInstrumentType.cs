@@ -30,9 +30,19 @@ public class ApprovedMeasuringInstrumentType
     public int? VerificationIntervalYears { get; private set; }
 
     /// <summary>
-    /// Идентификатор методики поверки типа средства измерений.
+    /// Шифр и наименование методики поверки типа средства измерений.
     /// </summary>
-    public Guid VerificationMethodId { get; private set; }
+    public string VerificationMethodName { get; private set; }
+
+    /// <summary>
+    /// Дата начала срока действия свидетельства об утверждении типа средства измерений.
+    /// </summary>
+    public DateOnly ApprovalValidFrom { get; private set; }
+
+    /// <summary>
+    /// Дата окончания срока действия свидетельства об утверждении типа средства измерений.
+    /// </summary>
+    public DateOnly ApprovalExpiryDate { get; private set; }
 
     // Для EF
     private ApprovedMeasuringInstrumentType() {}
@@ -41,7 +51,9 @@ public class ApprovedMeasuringInstrumentType
         string registrationNumber, 
         string typeName,
         string fullName,
-        Guid verificationMethodId,
+        string verificationMethodName,
+        DateOnly approvalValidFrom, 
+        DateOnly approvalExpiryDate,
         int? verificationIntervalYears = null)
     {
         if (string.IsNullOrWhiteSpace(registrationNumber) == true)
@@ -59,9 +71,14 @@ public class ApprovedMeasuringInstrumentType
             throw new ArgumentException("Наименование типа средства измерений не может быть пустым", nameof(fullName));
         }
 
-        if (verificationMethodId == Guid.Empty)
+        if (string.IsNullOrWhiteSpace(verificationMethodName) == true)
         {
-            throw new ArgumentException("Методика поверки должна быть указана", nameof(verificationMethodId)); 
+            throw new ArgumentException("Наименование методики поверки не может быть пустым", nameof(verificationMethodName)); 
+        }
+
+        if (approvalValidFrom > approvalExpiryDate)
+        {
+            throw new ArgumentException("Дата начала не может быть позднее даты окончания срока действия свидетельства об утверждении типа", nameof(approvalValidFrom));
         }
 
         Id = Guid.NewGuid();
@@ -71,6 +88,9 @@ public class ApprovedMeasuringInstrumentType
         FullName = fullName.Trim();
 
         VerificationIntervalYears = verificationIntervalYears;
-        VerificationMethodId = verificationMethodId;
+        VerificationMethodName = verificationMethodName.Trim();
+
+        ApprovalValidFrom = approvalValidFrom;
+        ApprovalExpiryDate = approvalExpiryDate;
     }
 }
