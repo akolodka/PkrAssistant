@@ -8,41 +8,70 @@ namespace PkrAssistant.Domain.Instruments;
 public class MeasuringInstrument
 {
     public Guid Id { get; private set; }
+
+    /// <summary>
+    /// Заводской номер средства измерений.
+    /// </summary>
     public string SerialNumber { get; private set; }
 
     /// <summary>
-    /// Межповерочный интервал в годах (может варьироваться между установленных внутри методики поверки значений).
+    /// Идентификатор утверждённого типа средства измерений.
     /// </summary>
-    public int? VerificationIntervalYears { get; private set; }
+    public Guid ApprovedMeasuringInstrumentTypeId { get; private set; }
 
-    // Внешний ключ
-    public Guid MeasuringInstrumentModificationId { get; private set; }
+    /// <summary>
+    /// Наименование модификации средства измерений.
+    /// </summary>
+    public string? ModificationName { get; private set; }
 
-    // Навигационное свойство
-    public MeasuringInstrumentModification Modification { get; private set; }
+    /// <summary>
+    /// Состав средства измерений (измерительные блоки).
+    /// </summary>
+    public string? Composition {  get; private set; }
+
+    /// <summary>
+    /// Межповерочный интервал в годах.
+    /// </summary>
+    public int VerificationIntervalYears { get; private set; }
 
     // Для EF
     private MeasuringInstrument() {}
 
     public MeasuringInstrument(
         string serialNumber, 
-        Guid measuringInstrumentModificationId,
-        int? verificationIntervalYears = null)
+        Guid approvedMeasuringInstrumentTypeId,
+        int verificationIntervalYears,
+        string? modificationName = null,
+        string? composition = null)
     {
-        if (string.IsNullOrWhiteSpace(serialNumber))
+        if (string.IsNullOrWhiteSpace(serialNumber) == true)
         {
             throw new ArgumentException("Заводской номер не может быть пустым", nameof(serialNumber));
         }
 
-        if (measuringInstrumentModificationId == Guid.Empty)
+        if (approvedMeasuringInstrumentTypeId == Guid.Empty)
         {
-            throw new ArgumentException("Модификация должна быть указана", nameof(measuringInstrumentModificationId));
+            throw new ArgumentException("Идентификатор утрверждённого типа средств измерений должен быть указан", nameof(approvedMeasuringInstrumentTypeId));
+        }
+
+        if (verificationIntervalYears < 1)
+        {
+            throw new ArgumentException("Межповерочный интервал должен быть положительным числом", nameof(verificationIntervalYears));
         }
 
         Id = Guid.NewGuid();
         SerialNumber = serialNumber.Trim();
-        
+
+        ApprovedMeasuringInstrumentTypeId = approvedMeasuringInstrumentTypeId;
+
+        ModificationName = (string.IsNullOrWhiteSpace(modificationName) == true) 
+            ? null 
+            : modificationName.Trim();
+
+        Composition = (string.IsNullOrWhiteSpace(composition) == true)
+            ? null
+            : composition.Trim();
+
         VerificationIntervalYears = verificationIntervalYears;
-        MeasuringInstrumentModificationId = measuringInstrumentModificationId;
     }
 }
