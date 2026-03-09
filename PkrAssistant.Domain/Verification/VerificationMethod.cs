@@ -8,14 +8,20 @@ namespace PkrAssistant.Domain.Verification;
 public class VerificationMethod
 {
     public Guid Id { get; private set; }
-    public string Name { get; private set; }
 
     /// <summary>
     /// Шифр методики поверки.
     /// </summary>
     public string CodeName { get; private set; }
 
-    // Внешний ключ
+    /// <summary>
+    /// Наименование методики поверки.
+    /// </summary>
+    public string Name { get; private set; }
+
+    /// <summary>
+    /// Идентификатор утверждённого типа средства измерений.
+    /// </summary>
     public Guid ApprovedMeasuringInstrumentTypeId { get; private set; }
 
     // Для EF
@@ -39,7 +45,7 @@ public class VerificationMethod
 
         if (approvedMeasuringInstrumentTypeId == Guid.Empty)
         {
-            throw new ArgumentException("Идентификатор типа СИ должен быть указан", nameof(approvedMeasuringInstrumentTypeId));
+            throw new ArgumentException("Идентификатор утверждённого типа СИ должен быть указан", nameof(approvedMeasuringInstrumentTypeId));
         }
 
         Id = Guid.NewGuid();  
