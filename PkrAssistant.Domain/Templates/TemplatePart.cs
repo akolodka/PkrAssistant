@@ -47,6 +47,5 @@ public abstract class TemplatePart
 
         FileName = fileName.Trim(); 
         FileContent = fileContent;
-
     }
 }
