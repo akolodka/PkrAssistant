@@ -19,7 +19,8 @@ public static class TemplatePartExtensions
     /// </summary>
     public static bool HasValidExtension(this TemplatePart part)
     {
-        if (part == null || string.IsNullOrWhiteSpace(part.FileName) == true)
+
+        if (string.IsNullOrWhiteSpace(part.FileName) == true)
         {
             return false;
         }
