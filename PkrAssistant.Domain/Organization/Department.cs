@@ -22,9 +22,7 @@ public class Department
     // Для EF
     private Department() {}
 
-    public Department(
-        string name, 
-        string comment)
+    public Department(string name, string comment)
     {
         if (string.IsNullOrWhiteSpace(name) == true)
         {
