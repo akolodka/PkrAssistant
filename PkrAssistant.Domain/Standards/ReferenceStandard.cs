@@ -45,6 +45,11 @@ public class ReferenceStandard
     /// </summary>
     public ICollection<Guid> UnitOfMeasurementIds { get; private set; }
 
+    /// <summary>
+    /// Ранг эталона.
+    /// </summary>
+    public Guid StandardRankId { get; private set; }
+
     // Для EF
     private ReferenceStandard() {}
 
@@ -54,6 +59,7 @@ public class ReferenceStandard
         string keywords, 
         string attestationCertificateNumber, 
         DateOnly attestationExpiryDate,
+        Guid standardRankId,
         bool isActive)
     {
         if (string.IsNullOrWhiteSpace(registrationNumber) == true)
@@ -68,7 +74,7 @@ public class ReferenceStandard
 
         if (string.IsNullOrWhiteSpace(keywords) == true)
         {
-            throw new ArgumentException("Ключевое слова эталона не могут быть пустыми", nameof(keywords));
+            throw new ArgumentException("Ключевые слова эталона не могут быть пустыми", nameof(keywords));
         }
 
         if (string.IsNullOrWhiteSpace(attestationCertificateNumber) == true)
@@ -79,6 +85,11 @@ public class ReferenceStandard
         if (attestationExpiryDate.Year < 2000)
         {
             throw new ArgumentException("Срок действия свидетельства об аттестации эталона должен быть не ранее 2000 года", nameof(attestationExpiryDate));
+        }
+
+        if (standardRankId == Guid.Empty)
+        {
+            throw new ArgumentException("Ранг эталона должен быть указан", nameof(standardRankId));
         }
 
         Id = Guid.NewGuid();
@@ -93,6 +104,7 @@ public class ReferenceStandard
         IsActive = isActive;
 
         UnitOfMeasurementIds = new List<Guid>();
+        StandardRankId = standardRankId;
     }
 
     /// <summary>
@@ -128,5 +140,10 @@ public class ReferenceStandard
     public void RemoveUnitOfMeasurement(Guid unitOfMeasurementId)
     {
         UnitOfMeasurementIds.Remove(unitOfMeasurementId);
+    }
+
+    public override string ToString()
+    {
+        return $"{RegistrationNumber} {Name}";
     }
 }
