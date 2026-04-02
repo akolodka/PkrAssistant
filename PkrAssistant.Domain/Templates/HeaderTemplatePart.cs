@@ -16,9 +16,9 @@ public class HeaderTemplatePart : TemplatePart
     private HeaderTemplatePart() {}
 
     public HeaderTemplatePart(
+        Guid departmentId,
         string fileName,
-        byte[] fileContent,
-        Guid departmentId)
+        byte[] fileContent)
         : base(TemplatePartType.Header, fileName, fileContent)
     {
         if (departmentId == Guid.Empty)
