@@ -39,13 +39,24 @@ public abstract class TemplatePart
 
         if (fileContent == null)
         {
-           throw new ArgumentNullException(nameof(fileContent)); 
+           throw new ArgumentNullException(nameof(fileContent), "Файл должен быть загружен");
+        }
+
+        if (fileContent.Length == 0)
+        {
+            throw new ArgumentException("Содержимое файла шаблона не может быть пустым", nameof(fileContent));
         }
 
         Id = Guid.NewGuid();
         Type = type;
 
-        FileName = fileName.Trim(); 
+        FileName = fileName.Trim();
         FileContent = fileContent;
+    }
+
+    // Для отладки
+    public override string ToString()
+    {
+        return $"{Type}: {FileName}";
     }
 }
