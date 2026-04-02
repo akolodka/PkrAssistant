@@ -32,6 +32,6 @@ public class HeaderTemplatePart : TemplatePart
     // Для отладки
     public override string ToString()
     {
-        return $"{FileName} ({DepartmentId})";
+        return $"{FileName} (Department = {DepartmentId})";
     }
 }
