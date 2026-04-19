@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 
 namespace PkrAssistant.Application.ProtocolAssembly;
@@ -28,7 +26,25 @@ public class ProtocolAssemblyService : IProtocolAssemblyService
     /// <returns>Результат сборки в виде ProtocolAssemblyResult.</returns>
     public async Task<ProtocolAssemblyResult> AssembleAsync(AssemblyRequest request)
     {
+        if (request?.TemplatePartIds == null || request.TemplatePartIds.Any() == false)
+        {
+            return ProtocolAssemblyResult.Failure("Запрос не содержит идентификаторы частей шаблона.");
+        }
+
         var parts = await _provider.GetPartsByIdsAsync(request.TemplatePartIds);
+
+        if (parts.Count < request.TemplatePartIds.Count)
+        {
+            var missingIds = request.TemplatePartIds
+                .Except(parts.Select(p => p.Id));
+
+            return ProtocolAssemblyResult.Failure($"Не найдены части: {string.Join(", ", missingIds)}");
+        }
+
+        if (parts.Any(p => p.FileContent == null || p.FileContent.Length == 0))
+        {
+            return ProtocolAssemblyResult.Failure("Одна из частей шаблона не содержит данные.");
+        }
 
         // Сортировка по логическому порядку сборки, порядок определяется значениями enum TemplatePartType
         var fileContent = await _assembler.AssembleAsync(
