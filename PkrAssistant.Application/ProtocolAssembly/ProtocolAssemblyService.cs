@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PkrAssistant.Application.ProtocolAssembly;
 
@@ -18,8 +21,21 @@ public class ProtocolAssemblyService : IProtocolAssemblyService
         _assembler = assembler;
     }
 
-    public Task<ProtocolAssemblyResult> AssembleAsync(AssemblyRequest request)
+    /// <summary>
+    /// Собирает шаблон поверки на основе запроса.
+    /// </summary>
+    /// <param name="request">Запрос, содержащий Id частей шаблона.</param>
+    /// <returns>Результат сборки в виде ProtocolAssemblyResult.</returns>
+    public async Task<ProtocolAssemblyResult> AssembleAsync(AssemblyRequest request)
     {
-        return Task.FromResult(ProtocolAssemblyResult.Failure("Not implemented"));
+        var parts = await _provider.GetPartsByIdsAsync(request.TemplatePartIds);
+
+        // Сортировка по логическому порядку сборки, порядок определяется значениями enum TemplatePartType
+        var fileContent = await _assembler.AssembleAsync(
+            parts.OrderBy(p => p.Type)
+                .Select(p => p.FileContent)
+                .ToArray());
+
+        return ProtocolAssemblyResult.Success(fileContent);
     }
 }
