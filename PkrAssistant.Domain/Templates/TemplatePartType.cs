@@ -8,25 +8,25 @@ public enum TemplatePartType
     /// <summary>
     /// Заголовок шаблона поверки.
     /// </summary>
-    Header,
+    Header = 1,
 
     /// <summary>
     /// Блок сведений об эталонах.
     /// </summary>
-    ReferenceStandards,
+    ReferenceStandards = 2,
 
     /// <summary>
     /// Блок предварительных мероприятий поверки (внешний осмотр, опробование).
     /// </summary>
-    PreliminaryInspection,
+    PreliminaryInspection = 3,
 
     /// <summary>
     /// Основной блок мероприятий поверки (определение метрологических характеристик).
     /// </summary>
-    MetrologicalInspection,
+    MetrologicalInspection = 4,
 
     /// <summary>
     /// Заключение и подписи.
     /// </summary>
-    Footer
+    Footer = 5
 }
