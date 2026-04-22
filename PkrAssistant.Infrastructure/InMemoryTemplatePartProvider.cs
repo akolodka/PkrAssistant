@@ -31,11 +31,6 @@ public class InMemoryTemplatePartProvider : ITemplatePartProvider
             .Select(p => p.Value)
             .ToList();
 
-        if (result.Count < templatePartIds.Count)
-        {
-            throw new KeyNotFoundException("Части шаблона не найдены в хранилище");
-        }
-
         return Task.FromResult(result);
     }
 }
