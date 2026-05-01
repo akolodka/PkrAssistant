@@ -17,7 +17,7 @@ public abstract class TemplatePart
     /// <summary>
     /// Байтовый массив содержимого файла шаблона (для хранения в БД).
     /// </summary>
-    public byte[] FileContent { get; protected set; }
+    public byte[] FileContent { get; protected internal set; }
 
     /// <summary>
     /// Тип части шаблона (используется как дискриминатор в БД).

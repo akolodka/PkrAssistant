@@ -23,7 +23,42 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
 
     public bool TryValidate(out ProtocolAssemblyResult? failureAssemblyResult)
     {
-        // Проверка на количество частей
+        if (TryValidatePartsCount(out failureAssemblyResult) == false)
+        {
+            return false;
+        }
+
+        if (TryValidateFileContent(out failureAssemblyResult) == false)
+        {
+            return false;
+        }
+
+        if (TryValidateDistinctDepartment(out failureAssemblyResult) == false)
+        {
+            return false;
+        }
+        
+        if (TryValidateMissingProtocolTypes(out failureAssemblyResult) == false)
+        {
+            return false;
+        }
+
+        if (TryValidateDuplicatePartTypes(out failureAssemblyResult) == false)
+        {
+            return false;
+        }
+
+        failureAssemblyResult = null;
+        return true;
+    }
+
+    /// <summary>
+    /// Проверяет количество возвращаемых частей шаблона.
+    /// </summary>
+    /// <param name="failureAssemblyResult">Отрицательный результат сборки шаблона.</param>
+    /// <returns>True, если количество возвращаемых частей шаблона совпадает с количеством запрошенных частей шаблона.</returns>
+    private bool TryValidatePartsCount(out ProtocolAssemblyResult? failureAssemblyResult)
+    {
         if (_parts.Count < _requestIds.Count)
         {
             var missingIds = _requestIds.Except(_parts.Select(p => p.Id));
@@ -32,14 +67,38 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
             return false;
         }
 
-        // Проверка на наличие даных в частях шаблонов
-        if (_parts.Any(p => p.FileContent == null || p.FileContent.Length == 0))
+        failureAssemblyResult = null;
+        return true;
+    }
+
+    /// <summary>
+    /// Проверяет наполнение частей шаблона.
+    /// </summary>
+    /// <param name="failureAssemblyResult">Отрицательный результат сборки шаблона.</param>
+    /// <returns>True, если все части шаблона содержат данные.</returns>
+    private bool TryValidateFileContent(out ProtocolAssemblyResult? failureAssemblyResult)
+    {
+        var empties = _parts
+            .Where(p => p.FileContent == null || p.FileContent.Length == 0)
+            .Select(e => e.Id);
+
+        if (empties.Any() == true)
         {
-            failureAssemblyResult = ProtocolAssemblyResult.Failure("Одна из частей шаблона не содержит данные.");
+            failureAssemblyResult = ProtocolAssemblyResult.Failure($"Эти части шаблона не содержат данные: {string.Join(", ", empties)}.");
             return false;
         }
 
-        // Проверка на то, что все части принадлежат одному подразделению
+        failureAssemblyResult = null;
+        return true;
+    }
+
+    /// <summary>
+    /// Проверяет принадлежность к подразделению частей шаблона.
+    /// </summary>
+    /// <param name="failureAssemblyResult">Отрицательный результат сборки шаблона.</param>
+    /// <returns>True, если все части шаблона принадлежат одному подразделению.</returns>
+    private bool TryValidateDistinctDepartment(out ProtocolAssemblyResult? failureAssemblyResult)
+    {
         var departmentsCount = _parts
             .Select(p => p.DepartmentId)
             .Distinct()
@@ -51,12 +110,21 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
             return false;
         }
 
-        // Проверка на то, что найдены все необходимые части
+        failureAssemblyResult = null;
+        return true;
+    }
+
+    /// <summary>
+    /// Проверяет наличие недостающих частей шаблона.
+    /// </summary>
+    /// <param name="failureAssemblyResult">Отрицательный результат сборки шаблона.</param>
+    /// <returns>True, если присутствуют все типы частей шаблона.</returns>
+    private bool TryValidateMissingProtocolTypes(out ProtocolAssemblyResult? failureAssemblyResult)
+    {
         var referenceTypes = Enum.GetValues<TemplatePartType>();
 
         var partTypes = _parts
-            .Select(p => p.Type)
-            .Distinct();
+            .Select(p => p.Type);
 
         var missingTypes = referenceTypes.Except(partTypes);
 
@@ -66,7 +134,30 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
             return false;
         }
 
-        failureAssemblyResult =  null;
+        failureAssemblyResult = null;
+        return true;
+    }
+
+    /// <summary>
+    /// Проверяет наличие дубликатов типов частей шаблона.
+    /// </summary>
+    /// <param name="failureAssemblyResult">Отрицательный результат сборки шаблона.</param>
+    /// <returns>True, если все части шаблона представлены в единственном экземпляре.</returns>
+    private bool TryValidateDuplicatePartTypes(out ProtocolAssemblyResult? failureAssemblyResult)
+    {
+        var duplicates = _parts
+            .Select(p => p.Type)
+            .GroupBy(p => p)
+            .Where(g => g.Count() > 1)
+            .Select(g => g.Key);
+
+        if (duplicates.Any() == true)
+        {
+            failureAssemblyResult = ProtocolAssemblyResult.Failure($"Обнаружены дубликаты частей шаблонов: {string.Join(", ", duplicates)}.");
+            return false;
+        }
+
+        failureAssemblyResult = null;
         return true;
     }
 }
