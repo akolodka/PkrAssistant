@@ -23,6 +23,7 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
 
     public bool TryValidate(out ProtocolAssemblyResult? failureAssemblyResult)
     {
+        // Проверка на количество частей
         if (_parts.Count < _requestIds.Count)
         {
             var missingIds = _requestIds.Except(_parts.Select(p => p.Id));
@@ -31,12 +32,14 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
             return false;
         }
 
+        // Проверка на наличие даных в частях шаблонов
         if (_parts.Any(p => p.FileContent == null || p.FileContent.Length == 0))
         {
             failureAssemblyResult = ProtocolAssemblyResult.Failure("Одна из частей шаблона не содержит данные.");
             return false;
         }
 
+        // Проверка на то, что все части принадлежат одному подразделению
         var departmentsCount = _parts
             .Select(p => p.DepartmentId)
             .Distinct()
@@ -45,6 +48,21 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
         if (departmentsCount > 1)
         {
             failureAssemblyResult = ProtocolAssemblyResult.Failure("Части шаблона принадлежат разным отделам.");
+            return false;
+        }
+
+        // Проверка на то, что найдены все необходимые части
+        var referenceTypes = Enum.GetValues<TemplatePartType>();
+
+        var partTypes = _parts
+            .Select(p => p.Type)
+            .Distinct();
+
+        var missingTypes = referenceTypes.Except(partTypes);
+
+        if (missingTypes.Any() == true)
+        {
+            failureAssemblyResult = ProtocolAssemblyResult.Failure($"Недостаёт частей шаблона: {string.Join(", ", missingTypes)}.");
             return false;
         }
 
