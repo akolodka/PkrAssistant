@@ -24,13 +24,19 @@ public abstract class TemplatePart
     /// </summary>
     public TemplatePartType Type { get; private set; }
 
+    /// <summary>
+    /// Идентификатор подразделения шаблона (для гарантии сохранности ширины шаблона).
+    /// </summary>
+    public Guid DepartmentId { get; private set; }
+
     // Для EF
     protected TemplatePart() {}
 
     protected TemplatePart(
         TemplatePartType type, 
         string fileName, 
-        byte[] fileContent)
+        byte[] fileContent, 
+        Guid departmentId)
     {
         if (string.IsNullOrWhiteSpace(fileName) == true)
         {
@@ -47,11 +53,18 @@ public abstract class TemplatePart
             throw new ArgumentException("Содержимое файла шаблона не может быть пустым", nameof(fileContent));
         }
 
+        if (departmentId == Guid.Empty)
+        {
+            throw new ArgumentException("Идентификатор подразделения должен быть заполнен", nameof(departmentId));
+        }
+
         Id = Guid.NewGuid();
         Type = type;
 
         FileName = fileName.Trim();
         FileContent = fileContent;
+
+        DepartmentId = departmentId;
     }
 
     // Для отладки

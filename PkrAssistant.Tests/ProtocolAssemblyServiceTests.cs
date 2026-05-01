@@ -32,6 +32,7 @@ public class ProtocolAssemblyServiceTests
         provider.AddPart(header);
 
         var neck = new NeckTemplatePart(
+            header.DepartmentId,
             Guid.NewGuid(),
             header.Id,
             "Список эталонов шаблона", 
@@ -79,6 +80,7 @@ public class ProtocolAssemblyServiceTests
         provider.AddPart(header);
 
         var neck = new NeckTemplatePart(
+            header.DepartmentId,
             Guid.NewGuid(),
             header.Id,
             "Список эталонов шаблона",

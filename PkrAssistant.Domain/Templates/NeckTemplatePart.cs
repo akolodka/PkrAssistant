@@ -21,11 +21,12 @@ public class NeckTemplatePart : TemplatePart
     private NeckTemplatePart() {}
 
     public NeckTemplatePart(
+        Guid departmentId,
         Guid measuringInstrumentId,
         Guid headerTemplatePartId,
         string fileName,
         byte[] fileContent)
-        : base(TemplatePartType.ReferenceStandards, fileName, fileContent)
+        : base(TemplatePartType.ReferenceStandards, fileName, fileContent, departmentId)
     {
         if (measuringInstrumentId == Guid.Empty)
         {
@@ -46,6 +47,6 @@ public class NeckTemplatePart : TemplatePart
     // Для отладки
     public override string ToString()
     {
-        return $"{FileName} (Instrument = {MeasuringInstrumentId}, Header = {HeaderTemplatePartId})";
+        return $"{FileName} Type = {TemplatePartType.ReferenceStandards} Instrument = {MeasuringInstrumentId}, Header = {HeaderTemplatePartId})";
     }
 }

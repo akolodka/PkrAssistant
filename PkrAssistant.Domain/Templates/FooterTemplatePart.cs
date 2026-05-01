@@ -7,11 +7,6 @@ namespace PkrAssistant.Domain.Templates;
 /// </summary>
 public class FooterTemplatePart : TemplatePart
 {
-    /// <summary>
-    /// Идентификатор подразделения шаблона (для гарантии сохранности ширины шаблона).
-    /// </summary>
-    public Guid DepartmentId { get; private set; }
-
     // Для EF
     private FooterTemplatePart() {}
 
@@ -19,15 +14,8 @@ public class FooterTemplatePart : TemplatePart
         Guid departmentId,
         string fileName,
         byte[] fileContent)
-        : base(TemplatePartType.Footer, fileName, fileContent)
-    {
-        if (departmentId == Guid.Empty)
-        {
-            throw new ArgumentException("Идентификатор подразделения должен быть указан", nameof(departmentId));
-        }
-
-        DepartmentId = departmentId;
-    }
+        : base(TemplatePartType.Footer, fileName, fileContent, departmentId)
+    {}
 
     // Для отладки
     public override string ToString()
