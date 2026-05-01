@@ -25,18 +25,18 @@ public class ProtocolAssemblyServiceTests
         var provider = new InMemoryTemplatePartProvider();
 
         var header = new HeaderTemplatePart(
-            Guid.NewGuid(), 
-            "Шапка шаблона", 
-            new byte[] { 1, 2 });
+            departmentId: Guid.NewGuid(), 
+            fileName: "Шапка шаблона", 
+            fileContent: new byte[] { 1, 2 });
 
         provider.AddPart(header);
 
         var neck = new NeckTemplatePart(
-            header.DepartmentId,
-            Guid.NewGuid(),
-            header.Id,
-            "Список эталонов шаблона", 
-            new byte[] { 3, 4 });
+            departmentId: header.DepartmentId,
+            measuringInstrumentId: Guid.NewGuid(),
+            headerTemplatePartId: header.Id,
+            fileName: "Список эталонов шаблона", 
+            fileContent: new byte[] { 3, 4 });
 
         provider.AddPart(neck);
 
@@ -73,18 +73,18 @@ public class ProtocolAssemblyServiceTests
         var provider = new InMemoryTemplatePartProvider();
 
         var header = new HeaderTemplatePart(
-            Guid.NewGuid(),
-            "Шапка шаблона",
-            new byte[] {1,2});
+            departmentId: Guid.NewGuid(),
+            fileName: "Шапка шаблона",
+            fileContent: new byte[] {1,2});
 
         provider.AddPart(header);
 
         var neck = new NeckTemplatePart(
-            header.DepartmentId,
-            Guid.NewGuid(),
-            header.Id,
-            "Список эталонов шаблона",
-            new byte[] { 3, 4 });
+            departmentId: header.DepartmentId,
+            measuringInstrumentId: Guid.NewGuid(),
+            headerTemplatePartId: header.Id,
+            fileName: "Список эталонов шаблона",
+            fileContent: new byte[] { 3, 4 });
 
         var assembler = new FakeFileAssembler();
 
@@ -111,6 +111,56 @@ public class ProtocolAssemblyServiceTests
         Assert.Contains(
             neck.Id.ToString(), 
             result.ErrorMessage);
+
+        Assert.Null(result.FileContent);
+
+        Assert.Contains("Не найдены части", result.ErrorMessage);
+    }
+
+    [Fact]
+    public async Task AssembleAsync_WithMixedDepartmentIds_ReturnsFailure()
+    {
+        var provider = new InMemoryTemplatePartProvider();
+
+        var header = new HeaderTemplatePart(
+            departmentId: Guid.NewGuid(),
+            fileName: "Шапка шаблона",
+            fileContent: new byte[] { 1, 2 });
+
+        provider.AddPart(header);
+
+        var neck = new NeckTemplatePart(
+            departmentId: Guid.NewGuid(),
+            measuringInstrumentId: Guid.NewGuid(),
+            headerTemplatePartId: header.Id,
+            fileName: "Список эталонов шаблона",
+            fileContent: new byte[] { 3, 4 });
+
+        provider.AddPart(neck);
+
+        var assembler = new FakeFileAssembler();
+
+        var service = new ProtocolAssemblyService(provider, assembler);
+
+        IReadOnlyList<Guid> parts = new List<TemplatePart>()
+        {
+            header,
+            neck
+        }
+        .Select(p => p.Id)
+        .ToArray();
+
+        var request = new AssemblyRequest(Guid.NewGuid(), parts);
+
+        //Act
+        var result = await service.AssembleAsync(request);
+
+        // Assert
+        Assert.False(result.IsSuccess);
+
+        Assert.NotNull(result.ErrorMessage);
+
+        Assert.Contains("разным отделам", result.ErrorMessage);
 
         Assert.Null(result.FileContent);
     }

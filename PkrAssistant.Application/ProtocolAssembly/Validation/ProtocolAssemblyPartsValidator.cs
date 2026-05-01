@@ -37,6 +37,17 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
             return false;
         }
 
+        var departmentsCount = _parts
+            .Select(p => p.DepartmentId)
+            .Distinct()
+            .Count();
+
+        if (departmentsCount > 1)
+        {
+            failureAssemblyResult = ProtocolAssemblyResult.Failure("Части шаблона принадлежат разным отделам.");
+            return false;
+        }
+
         failureAssemblyResult =  null;
         return true;
     }
