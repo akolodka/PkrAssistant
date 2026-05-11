@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using PkrAssistant.Application.ProtocolAssembly;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -23,9 +24,11 @@ public class ClosedXmlFileAssembler : IFileAssembler
 
         var worksheet = destination.AddWorksheet();
 
+        int? expectedColumnsCount = null;
+
         foreach (var content in templatePartContents)
         {
-            ProcessAssemble(worksheet, content);
+            ProcessAssemble(worksheet, content, ref expectedColumnsCount);
         }
 
         destination.SaveAs(stream);
@@ -35,22 +38,37 @@ public class ClosedXmlFileAssembler : IFileAssembler
         return await Task.FromResult(fileContent);
     }
 
+
     /// <summary>
     /// Добавляет содержимое части шаблона в конец целевого листа.
     /// </summary>
     /// <param name="worksheet">Лист, который выполняется вставка данных.</param>
     /// <param name="fileContent">Содержимое, подлежащее вставке.</param>
-    private void ProcessAssemble(IXLWorksheet worksheet, byte[] fileContent)
+    /// <param name="expectedColumnsCount">Референсное значение количества столбцов в шаблоне, устанавливается первой непустой частью.</param>
+    private static void ProcessAssemble(
+        IXLWorksheet worksheet, 
+        byte[] fileContent,
+        ref int? expectedColumnsCount)
     {
         using var stream = new MemoryStream(fileContent);
         using var book = new XLWorkbook(stream);
 
         var source = book.Worksheet(1)
             .RangeUsed(XLCellsUsedOptions.AllContents);
-        
+
         if (source == null)
         {
             return;
+        }
+
+        if (expectedColumnsCount == null)
+        {
+            expectedColumnsCount = source.ColumnCount();
+        }
+
+        if (source.ColumnCount() != expectedColumnsCount)
+        {
+            throw new InvalidOperationException("Части шаблона используют разное количество столбцов");
         }
 
         var lastUsedCell = worksheet.LastCellUsed(XLCellsUsedOptions.AllContents);
