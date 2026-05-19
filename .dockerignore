@@ -1,0 +1,22 @@
+# Git
+.git/
+.gitignore
+
+# Build artifacts
+bin/
+obj/
+*.dll
+*.pdb
+
+# IDE & OS
+.idea/
+.vs/
+*.suo
+*.user
+.DS_Store
+Thumbs.db
+
+# Docker configs (чтобы не копировать сами конфиги внутрь образа)
+Dockerfile
+compose.yaml
+docker-compose.*

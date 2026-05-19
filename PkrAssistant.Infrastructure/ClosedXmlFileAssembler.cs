@@ -38,7 +38,6 @@ public class ClosedXmlFileAssembler : IFileAssembler
         return await Task.FromResult(fileContent);
     }
 
-
     /// <summary>
     /// Добавляет содержимое части шаблона в конец целевого листа.
     /// </summary>
