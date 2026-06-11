@@ -1,9 +1,9 @@
-﻿using PkrAssistant.Domain.Templates;
+﻿using PkrAssistant.Application.Templates;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace PkrAssistant.Domain.Extensions;
+namespace PkrAssistant.Application.Extensions;
 
 /// <summary>
 /// Методы расширений для составных частей шаблона поверки.

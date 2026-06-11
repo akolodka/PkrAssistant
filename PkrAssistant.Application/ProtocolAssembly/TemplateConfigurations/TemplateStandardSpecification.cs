@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Domain.TemplateConfigurations;
+namespace PkrAssistant.Application.TemplateConfigurations;
 
 /// <summary>
 /// Конфигурация, описывающая связь между эталонами и конкретным шаблоном.

@@ -1,5 +1,5 @@
 ﻿using PkrAssistant.Application.ProtocolAssembly;
-using PkrAssistant.Domain.Templates;
+using PkrAssistant.Application.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ public class InMemoryTemplatePartProvider : ITemplatePartProvider
         _store[part.Id] = part;
     }
 
-    public Task<IReadOnlyList<TemplatePart>> GetPartsByIdsAsync(IReadOnlyList<Guid> templatePartIds) 
+    public Task<IReadOnlyList<TemplatePart>> GetPartsByIdsAsync(IReadOnlyList<Guid> templatePartIds)
     {
         IReadOnlyList<TemplatePart> result = _store
             .Where(p => templatePartIds.Contains(p.Key))

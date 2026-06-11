@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Domain.Templates;
+namespace PkrAssistant.Application.Templates;
 
 /// <summary>
 /// Базовый класс для составных частей шаблона поверки.

@@ -1,4 +1,4 @@
-﻿namespace PkrAssistant.Domain.Templates;
+﻿namespace PkrAssistant.Application.Templates;
 
 /// <summary>
 /// Типы составных частей шаблона для поверки.

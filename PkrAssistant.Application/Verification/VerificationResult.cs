@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Domain.Verification;
+namespace PkrAssistant.Application.Verification;
 
 /// <summary>
 /// Результат поверки.

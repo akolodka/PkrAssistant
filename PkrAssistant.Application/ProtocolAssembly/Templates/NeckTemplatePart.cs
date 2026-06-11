@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Domain.Templates;
+namespace PkrAssistant.Application.Templates;
 
 /// <summary>
 /// Часть шаблона, содержащая сведения о применяемых эталонах.

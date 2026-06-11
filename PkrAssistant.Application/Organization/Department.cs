@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Domain.Organization;
+namespace PkrAssistant.Application.Organization;
 
 /// <summary>
 /// Подразделение организации, выполняющее поверку.

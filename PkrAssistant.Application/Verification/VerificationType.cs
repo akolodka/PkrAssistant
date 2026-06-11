@@ -1,4 +1,4 @@
-﻿namespace PkrAssistant.Domain.Verification;
+﻿namespace PkrAssistant.Application.Verification;
 
 /// <summary>
 /// Тип поверки.

@@ -1,5 +1,5 @@
 using PkrAssistant.Application.ProtocolAssembly;
-using PkrAssistant.Domain.Templates;
+using PkrAssistant.Application.Templates;
 using PkrAssistant.Infrastructure;
 using System;
 using System.Collections.Generic;

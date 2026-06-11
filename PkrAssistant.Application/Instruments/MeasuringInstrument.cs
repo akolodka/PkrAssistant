@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Domain.Instruments;
+namespace PkrAssistant.Application.Instruments;
 
 /// <summary>
 /// Конкретное средство измерений.

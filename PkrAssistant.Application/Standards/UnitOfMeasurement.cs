@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Domain.Standards;
+namespace PkrAssistant.Application.Standards;
 
 /// <summary>
 /// Единица измерений физической величины.
