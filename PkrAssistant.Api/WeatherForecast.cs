@@ -1,3 +1,5 @@
+using System;
+
 namespace PkrAssistant.Api;
 
 public class WeatherForecast
