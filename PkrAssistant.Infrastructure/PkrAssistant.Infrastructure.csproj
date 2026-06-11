@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PkrAssistant.Application\PkrAssistant.Application.csproj" />
-    <ProjectReference Include="..\PkrAssistant.Domain\PkrAssistant.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
