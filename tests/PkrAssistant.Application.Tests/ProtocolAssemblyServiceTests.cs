@@ -21,12 +21,12 @@ public class ProtocolAssemblyServiceTests
     [Fact]
     public async Task AssembleAsync_WithAllPartsPresent_ReturnsSuccessWithFileContent()
     {
-        // Assert: настройка зависимостей
+        // Assert: РЅР°СЃС‚СЂРѕР№РєР° Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
         var provider = new InMemoryTemplatePartProvider();
 
         var header = new HeaderTemplatePart(
             departmentId: Guid.NewGuid(),
-            fileName: "Шапка шаблона",
+            fileName: "РЁР°РїРєР° С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 1, 2 });
 
         provider.AddPart(header);
@@ -35,28 +35,28 @@ public class ProtocolAssemblyServiceTests
             departmentId: header.DepartmentId,
             measuringInstrumentId: Guid.NewGuid(),
             headerTemplatePartId: header.Id,
-            fileName: "Список эталонов шаблона",
+            fileName: "РЎРїРёСЃРѕРє СЌС‚Р°Р»РѕРЅРѕРІ С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 3, 4 });
 
         provider.AddPart(neck);
 
         var preliminary = new PreliminaryInspectionPart(
             departmentId: header.DepartmentId,
-            fileName: "Операции опробования",
+            fileName: "РћРїРµСЂР°С†РёРё РѕРїСЂРѕР±РѕРІР°РЅРёСЏ",
             fileContent: new byte[] { 5, 6 });
 
         provider.AddPart(preliminary);
 
         var metrological = new MetrologicalInspectionPart(
             departmentId: header.DepartmentId,
-            fileName: "Метрологические характеристики",
+            fileName: "РњРµС‚СЂРѕР»РѕРіРёС‡РµСЃРєРёРµ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё",
             fileContent: new byte[] {7, 8});
 
         provider.AddPart(metrological);
 
         var footer = new FooterTemplatePart(
             departmentId: header.DepartmentId,
-            fileName: "Подпись к шаблону поверки",
+            fileName: "РџРѕРґРїРёСЃСЊ Рє С€Р°Р±Р»РѕРЅСѓ РїРѕРІРµСЂРєРё",
             fileContent: new byte[] {9, 10});
 
         provider.AddPart(footer);
@@ -98,7 +98,7 @@ public class ProtocolAssemblyServiceTests
 
         var header = new HeaderTemplatePart(
             departmentId: Guid.NewGuid(),
-            fileName: "Шапка шаблона",
+            fileName: "РЁР°РїРєР° С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 1, 2 });
 
         provider.AddPart(header);
@@ -107,7 +107,7 @@ public class ProtocolAssemblyServiceTests
             departmentId: header.DepartmentId,
             measuringInstrumentId: Guid.NewGuid(),
             headerTemplatePartId: header.Id,
-            fileName: "Список эталонов шаблона",
+            fileName: "РЎРїРёСЃРѕРє СЌС‚Р°Р»РѕРЅРѕРІ С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 3, 4 });
 
         var assembler = new FakeFileAssembler();
@@ -138,7 +138,7 @@ public class ProtocolAssemblyServiceTests
 
         Assert.Null(result.FileContent);
 
-        Assert.Contains("Не найдены части", result.ErrorMessage);
+        Assert.Contains("РќРµ РЅР°Р№РґРµРЅС‹ С‡Р°СЃС‚Рё", result.ErrorMessage);
     }
 
     [Fact]
@@ -148,10 +148,10 @@ public class ProtocolAssemblyServiceTests
 
         var header = new HeaderTemplatePart(
             departmentId: Guid.NewGuid(),
-            fileName: "Шапка шаблона",
+            fileName: "РЁР°РїРєР° С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] {1,2});
         
-        // Имитация "грязных" данных, пришедших из БД
+        // РРјРёС‚Р°С†РёСЏ "РіСЂСЏР·РЅС‹С…" РґР°РЅРЅС‹С…, РїСЂРёС€РµРґС€РёС… РёР· Р‘Р”
         header.FileContent = Array.Empty<byte>();
 
         provider.AddPart(header);
@@ -160,7 +160,7 @@ public class ProtocolAssemblyServiceTests
             departmentId: Guid.NewGuid(),
             measuringInstrumentId: Guid.NewGuid(),
             headerTemplatePartId: header.Id,
-            fileName: "Список эталонов шаблона",
+            fileName: "РЎРїРёСЃРѕРє СЌС‚Р°Р»РѕРЅРѕРІ С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 3, 4 });
 
         provider.AddPart(neck);
@@ -187,7 +187,7 @@ public class ProtocolAssemblyServiceTests
 
         Assert.NotNull(result.ErrorMessage);
 
-        Assert.Contains("не содержат данные", result.ErrorMessage);
+        Assert.Contains("РЅРµ СЃРѕРґРµСЂР¶Р°С‚ РґР°РЅРЅС‹Рµ", result.ErrorMessage);
 
         Assert.Null(result.FileContent);
     }
@@ -199,7 +199,7 @@ public class ProtocolAssemblyServiceTests
 
         var header = new HeaderTemplatePart(
             departmentId: Guid.NewGuid(),
-            fileName: "Шапка шаблона",
+            fileName: "РЁР°РїРєР° С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 1, 2 });
 
         provider.AddPart(header);
@@ -208,7 +208,7 @@ public class ProtocolAssemblyServiceTests
             departmentId: Guid.NewGuid(),
             measuringInstrumentId: Guid.NewGuid(),
             headerTemplatePartId: header.Id,
-            fileName: "Список эталонов шаблона",
+            fileName: "РЎРїРёСЃРѕРє СЌС‚Р°Р»РѕРЅРѕРІ С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 3, 4 });
 
         provider.AddPart(neck);
@@ -235,7 +235,7 @@ public class ProtocolAssemblyServiceTests
 
         Assert.NotNull(result.ErrorMessage);
 
-        Assert.Contains("разным отделам", result.ErrorMessage);
+        Assert.Contains("СЂР°Р·РЅС‹Рј РѕС‚РґРµР»Р°Рј", result.ErrorMessage);
 
         Assert.Null(result.FileContent);
     }
@@ -243,12 +243,12 @@ public class ProtocolAssemblyServiceTests
     [Fact]
     public async Task AssembleAsync_WithMissingRequiredPartTypes_ReturnsFailure()
     {
-        // Assert: настройка зависимостей
+        // Assert: РЅР°СЃС‚СЂРѕР№РєР° Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
         var provider = new InMemoryTemplatePartProvider();
 
         var header = new HeaderTemplatePart(
             departmentId: Guid.NewGuid(), 
-            fileName: "Шапка шаблона", 
+            fileName: "РЁР°РїРєР° С€Р°Р±Р»РѕРЅР°", 
             fileContent: new byte[] { 1, 2 });
 
         provider.AddPart(header);
@@ -257,7 +257,7 @@ public class ProtocolAssemblyServiceTests
             departmentId: header.DepartmentId,
             measuringInstrumentId: Guid.NewGuid(),
             headerTemplatePartId: header.Id,
-            fileName: "Список эталонов шаблона", 
+            fileName: "РЎРїРёСЃРѕРє СЌС‚Р°Р»РѕРЅРѕРІ С€Р°Р±Р»РѕРЅР°", 
             fileContent: new byte[] { 3, 4 });
 
         provider.AddPart(neck);
@@ -284,18 +284,18 @@ public class ProtocolAssemblyServiceTests
 
         Assert.NotNull(result.ErrorMessage);
 
-        Assert.Contains("Недостаёт частей шаблона", result.ErrorMessage);
+        Assert.Contains("РќРµРґРѕСЃС‚Р°С‘С‚ С‡Р°СЃС‚РµР№ С€Р°Р±Р»РѕРЅР°", result.ErrorMessage);
     }
 
     [Fact]
     public async Task AssembleAsync_WithDuplicatePartTypes_ReturnsFailure()
     {
-        // Assert: настройка зависимостей
+        // Assert: РЅР°СЃС‚СЂРѕР№РєР° Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
         var provider = new InMemoryTemplatePartProvider();
 
         var header = new HeaderTemplatePart(
             departmentId: Guid.NewGuid(),
-            fileName: "Шапка шаблона",
+            fileName: "РЁР°РїРєР° С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 1, 2 });
 
         provider.AddPart(header);
@@ -304,35 +304,35 @@ public class ProtocolAssemblyServiceTests
             departmentId: header.DepartmentId,
             measuringInstrumentId: Guid.NewGuid(),
             headerTemplatePartId: header.Id,
-            fileName: "Список эталонов шаблона",
+            fileName: "РЎРїРёСЃРѕРє СЌС‚Р°Р»РѕРЅРѕРІ С€Р°Р±Р»РѕРЅР°",
             fileContent: new byte[] { 3, 4 });
 
         provider.AddPart(neck);
 
         var preliminary = new PreliminaryInspectionPart(
             departmentId: header.DepartmentId,
-            fileName: "Операции опробования",
+            fileName: "РћРїРµСЂР°С†РёРё РѕРїСЂРѕР±РѕРІР°РЅРёСЏ",
             fileContent: new byte[] { 5, 6 });
 
         provider.AddPart(preliminary);
 
         var metrological = new MetrologicalInspectionPart(
             departmentId: header.DepartmentId,
-            fileName: "Метрологические характеристики",
+            fileName: "РњРµС‚СЂРѕР»РѕРіРёС‡РµСЃРєРёРµ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё",
             fileContent: new byte[] { 7, 8 });
 
         provider.AddPart(metrological);
 
         var footer = new FooterTemplatePart(
             departmentId: header.DepartmentId,
-            fileName: "Подпись к шаблону поверки",
+            fileName: "РџРѕРґРїРёСЃСЊ Рє С€Р°Р±Р»РѕРЅСѓ РїРѕРІРµСЂРєРё",
             fileContent: new byte[] { 9, 10 });
 
         provider.AddPart(footer);
 
         var duplicate = new FooterTemplatePart(
             departmentId: header.DepartmentId,
-            fileName: "Подпись к шаблону поверки",
+            fileName: "РџРѕРґРїРёСЃСЊ Рє С€Р°Р±Р»РѕРЅСѓ РїРѕРІРµСЂРєРё",
             fileContent: new byte[] { 9, 10 });
 
         provider.AddPart(duplicate);
@@ -363,6 +363,6 @@ public class ProtocolAssemblyServiceTests
 
         Assert.NotNull(result.ErrorMessage);
 
-        Assert.Contains("дубликаты", result.ErrorMessage);
+        Assert.Contains("РґСѓР±Р»РёРєР°С‚С‹", result.ErrorMessage);
     }
 }
