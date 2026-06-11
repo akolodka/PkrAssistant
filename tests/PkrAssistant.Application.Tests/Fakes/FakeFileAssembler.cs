@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace PkrAssistant.Infrastructure;
+namespace PkrAssistant.Application.Tests.Fakes;
 
 /// <summary>
 /// Заглушка для тестирования сборки частей шаблоа.

@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PkrAssistant.Domain\PkrAssistant.Domain.csproj" />
-    <InternalsVisibleTo Include="PkrAssistant.Tests" />
+    <InternalsVisibleTo Include="PkrAssistant.Application.Tests" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,7 +1,6 @@
 using PkrAssistant.Application.ProtocolAssembly;
 using PkrAssistant.Application.Templates;
 using PkrAssistant.Application.Tests.Fakes;
-using PkrAssistant.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
