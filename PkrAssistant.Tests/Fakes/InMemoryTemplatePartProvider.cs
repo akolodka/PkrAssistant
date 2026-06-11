@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PkrAssistant.Infrastructure;
+namespace PkrAssistant.Application.Tests.Fakes;
 
 /// <summary>
 /// Хранит части шаблоны в памяти (для тестов и прототипирования).

@@ -23,6 +23,8 @@
   <ItemGroup>
     <ProjectReference Include="..\PkrAssistant.Application\PkrAssistant.Application.csproj" />
     <ProjectReference Include="..\PkrAssistant.Infrastructure\PkrAssistant.Infrastructure.csproj" />
+    <ProjectReference Include="..\src\PkrAssistant.Application\PkrAssistant.Application.csproj" />
+    <ProjectReference Include="..\src\PkrAssistant.Infrastructure\PkrAssistant.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
