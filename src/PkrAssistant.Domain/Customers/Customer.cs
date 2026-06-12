@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PkrAssistant.Application.Customers;
+namespace PkrAssistant.Domain.Customers;
 
 /// <summary>
 /// Заказчик работ (юридическое лицо).

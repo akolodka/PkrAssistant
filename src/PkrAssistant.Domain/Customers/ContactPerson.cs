@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Application.Customers;
+namespace PkrAssistant.Domain.Customers;
 
 /// <summary>
 /// Контактное лицо заказчика.

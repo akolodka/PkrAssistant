@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PkrAssistant.Application.Standards;
+namespace PkrAssistant.Domain.Standards;
 
 /// <summary>
 /// Эталон, применяемый при поверке.

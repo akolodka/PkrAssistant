@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PkrAssistant.Application.Personnel;
+namespace PkrAssistant.Domain.Personnel;
 
 /// <summary>
 /// Сотрудник, проводящий поверку (поверитель).
