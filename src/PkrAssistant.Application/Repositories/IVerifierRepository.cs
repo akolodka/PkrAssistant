@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PkrAssistant.Application.Repositories;
 public interface IVerifierRepository
 {
-    Task<Verifier?> GetByIdAcync(Guid id, CancellationToken ct = default);
+    Task<Verifier?> GetByIdAsync(Guid id, CancellationToken ct = default);
 
     Task<IReadOnlyList<Verifier>> GetAllAsync(CancellationToken ct = default);
 
