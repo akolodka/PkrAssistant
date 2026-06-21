@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace PkrAssistant.Infrastructure.Data;
 
@@ -9,14 +7,7 @@ internal sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbCon
 {
     public AppDbContext CreateDbContext(string[] args)
     {
-        var apiPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "PkrAssistant.Api");
-
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(apiPath)
-            .AddJsonFile("appsettings.Development.json", optional: false)
-            .Build();
-
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = "Host=shub_host;Port=5432;Database=stub_db;Username=stub_user;Password=stub_password";
 
         var builder = new DbContextOptionsBuilder<AppDbContext>();
 
