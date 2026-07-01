@@ -1,4 +1,4 @@
-﻿using PkrAssistant.Application.Templates;
+using PkrAssistant.Application.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,27 +23,27 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
 
     public bool TryValidate(out ProtocolAssemblyResult? failureAssemblyResult)
     {
-        if (TryValidatePartsCount(out failureAssemblyResult) == false)
+        if (TryValidatePartsCount(out failureAssemblyResult) is false)
         {
             return false;
         }
 
-        if (TryValidateFileContent(out failureAssemblyResult) == false)
+        if (TryValidateFileContent(out failureAssemblyResult) is false)
         {
             return false;
         }
 
-        if (TryValidateDistinctDepartment(out failureAssemblyResult) == false)
+        if (TryValidateDistinctDepartment(out failureAssemblyResult) is false)
         {
             return false;
         }
         
-        if (TryValidateMissingProtocolTypes(out failureAssemblyResult) == false)
+        if (TryValidateMissingProtocolTypes(out failureAssemblyResult) is false)
         {
             return false;
         }
 
-        if (TryValidateDuplicatePartTypes(out failureAssemblyResult) == false)
+        if (TryValidateDuplicatePartTypes(out failureAssemblyResult) is false)
         {
             return false;
         }
@@ -79,10 +79,10 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
     private bool TryValidateFileContent(out ProtocolAssemblyResult? failureAssemblyResult)
     {
         var empties = _parts
-            .Where(p => p.FileContent == null || p.FileContent.Length == 0)
+            .Where(p => p.FileContent is null || p.FileContent.Length == 0)
             .Select(e => e.Id);
 
-        if (empties.Any() == true)
+        if (empties.Any())
         {
             failureAssemblyResult = ProtocolAssemblyResult.Failure($"Эти части шаблона не содержат данные: {string.Join(", ", empties)}.");
             return false;
@@ -128,7 +128,7 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
 
         var missingTypes = referenceTypes.Except(partTypes);
 
-        if (missingTypes.Any() == true)
+        if (missingTypes.Any())
         {
             failureAssemblyResult = ProtocolAssemblyResult.Failure($"Недостаёт частей шаблона: {string.Join(", ", missingTypes)}.");
             return false;
@@ -151,7 +151,7 @@ public class ProtocolAssemblyPartsValidator : IProtocolAssemblyValidator
             .Where(g => g.Count() > 1)
             .Select(g => g.Key);
 
-        if (duplicates.Any() == true)
+        if (duplicates.Any())
         {
             failureAssemblyResult = ProtocolAssemblyResult.Failure($"Обнаружены дубликаты частей шаблонов: {string.Join(", ", duplicates)}.");
             return false;

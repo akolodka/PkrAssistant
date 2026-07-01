@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.Organization;
 
@@ -24,12 +24,12 @@ public class Department
 
     public Department(string name, string comment)
     {
-        if (string.IsNullOrWhiteSpace(name) == true)
+        if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException("Наименование подразделения не может быть пустым", nameof(name));
         }
 
-        if (string.IsNullOrWhiteSpace(comment) == true)
+        if (string.IsNullOrWhiteSpace(comment))
         {
             throw new ArgumentException("Комментарий не может быть пустым", nameof(comment));
         }

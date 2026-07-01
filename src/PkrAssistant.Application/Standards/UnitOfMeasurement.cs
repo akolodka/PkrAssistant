@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.Standards;
 
@@ -19,7 +19,7 @@ public class UnitOfMeasurement
 
     public UnitOfMeasurement(string name)
     {
-        if(string.IsNullOrWhiteSpace(name) == true)
+        if(string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException("Наименование единицы величины не может быть пустым", nameof(name));
         }

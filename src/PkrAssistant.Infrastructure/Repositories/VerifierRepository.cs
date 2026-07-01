@@ -25,7 +25,7 @@ internal class VerifierRepository : IVerifierRepository
     {
         var entity = verifier.ToEntity();
 
-        // синхронно потому, что Id генерится в домене
+        // Cинхронно, потому что Id генерится в домене.
         _context.Set<VerifierEntity>().Add(entity);
 
         await _context.SaveChangesAsync(ct);

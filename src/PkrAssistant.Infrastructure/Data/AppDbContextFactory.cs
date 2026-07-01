@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System;
 
@@ -12,7 +12,7 @@ internal sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbCon
         // строка будет передана через терминал
         var connectionString = Environment.GetEnvironmentVariable("DESIGN_TIME_CONNECTION");
 
-        if (string.IsNullOrWhiteSpace(connectionString) == true)
+        if (string.IsNullOrWhiteSpace(connectionString))
         {
             connectionString = "Host=shub_host;Port=5432;Database=stub_db;Username=stub_user;Password=stub_password";
         }
@@ -21,6 +21,8 @@ internal sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbCon
 
         builder.UseNpgsql(connectionString);
 
-        return new AppDbContext(builder.Options);
+        var context = new AppDbContext(builder.Options);
+
+        return context;
     }
 }

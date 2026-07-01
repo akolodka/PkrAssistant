@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Domain.Customers;
 
@@ -8,6 +8,7 @@ namespace PkrAssistant.Domain.Customers;
 public class ContactPerson
 {
     public Guid Id { get; private set; }
+
     public string Name { get; private set; }
 
     /// <summary>
@@ -37,12 +38,12 @@ public class ContactPerson
         bool isPriorityContact = false,
         string? note = null)
     {
-        if (string.IsNullOrWhiteSpace(name) == true)
+        if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException("Имя контактного лица не может быть пустым", nameof(name));
         }
         
-        if (string.IsNullOrWhiteSpace(phone) == true)
+        if (string.IsNullOrWhiteSpace(phone))
         {
             throw new ArgumentException("Номер телефона контактного лица не может быть пустым", nameof(phone));
         }
@@ -52,28 +53,28 @@ public class ContactPerson
         Name = name.Trim();
 
         var cleanPhone = phone.Trim()
-                              .Replace(" ", string.Empty)
-                              .Replace("-", string.Empty)
-                              .Replace("(", string.Empty)
-                              .Replace(")", string.Empty);
+            .Replace(" ", string.Empty)
+            .Replace("-", string.Empty)
+            .Replace("(", string.Empty)
+            .Replace(")", string.Empty);
 
-        if (IsPhoneValid(cleanPhone) == false)
+        if (IsPhoneValid(cleanPhone) is false)
         {
             throw new ArgumentException("Номер телефона должен быть в формате +7XXXXXXXXXX или 8XXXXXXXXXX", nameof(phone));
         }
 
         // Нормализация: привести номер к +7
-        Phone = (cleanPhone.StartsWith("8") == true)
+        Phone = cleanPhone.StartsWith("8")
             ? "+7" + cleanPhone.Substring(1) 
             : cleanPhone;
 
-        Email = (string.IsNullOrWhiteSpace(email) == true)
+        Email = string.IsNullOrWhiteSpace(email)
             ? null 
             : email.Trim();
 
         IsPriorityContact = isPriorityContact;
 
-        Note = (string.IsNullOrWhiteSpace(note) == true) 
+        Note = string.IsNullOrWhiteSpace(note)
             ? null 
             : note.Trim();
     }
@@ -85,20 +86,10 @@ public class ContactPerson
     /// <returns>True, если формат корректен.</returns>
     private static bool IsPhoneValid(string phone)
     {
-        var hasValidPrefix = (phone.StartsWith("+7") == true) || (phone.StartsWith("8") == true);
+        var hasValidPrefix = phone.StartsWith("+7") || phone.StartsWith("8");
 
-        if (hasValidPrefix == false)
-        {
-            return false;
-        }
+        var hasValidLength = phone.Replace("+", string.Empty).Length == 11;
 
-        var hasValidLength = (phone.Replace("+", string.Empty).Length == 11);
-
-        if (hasValidLength == false)
-        {
-            return false;
-        }
-
-        return true;
+        return hasValidPrefix && hasValidLength;
     }
 }

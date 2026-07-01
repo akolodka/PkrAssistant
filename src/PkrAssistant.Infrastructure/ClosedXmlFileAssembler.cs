@@ -1,4 +1,4 @@
-﻿using ClosedXML.Excel;
+using ClosedXML.Excel;
 using PkrAssistant.Application.ProtocolAssembly;
 using System;
 using System.Collections.Generic;
@@ -55,12 +55,12 @@ public class ClosedXmlFileAssembler : IFileAssembler
         var source = book.Worksheet(1)
             .RangeUsed(XLCellsUsedOptions.AllContents);
 
-        if (source == null)
+        if (source is null)
         {
             return;
         }
 
-        if (expectedColumnsCount == null)
+        if (expectedColumnsCount is null)
         {
             expectedColumnsCount = source.ColumnCount();
         }
@@ -72,7 +72,7 @@ public class ClosedXmlFileAssembler : IFileAssembler
 
         var lastUsedCell = worksheet.LastCellUsed(XLCellsUsedOptions.AllContents);
 
-        var destination = (lastUsedCell == null)
+        var destination = (lastUsedCell is null)
             ? worksheet.Cell("A1")
             : lastUsedCell.WorksheetRow()
                 .RowBelow()

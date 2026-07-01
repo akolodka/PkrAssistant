@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.Instruments;
 
@@ -56,22 +56,22 @@ public class ApprovedMeasuringInstrumentType
         DateOnly approvalExpiryDate,
         int? verificationIntervalYears = null)
     {
-        if (string.IsNullOrWhiteSpace(registrationNumber) == true)
+        if (string.IsNullOrWhiteSpace(registrationNumber))
         {
             throw new ArgumentException("Регистрационный номер не может быть пустым", nameof(registrationNumber));
         }
 
-        if (string.IsNullOrWhiteSpace(typeName) == true)
+        if (string.IsNullOrWhiteSpace(typeName))
         {
             throw new ArgumentException("Тип средства измерений не может быть пустым", nameof(typeName));
         }
 
-        if (string.IsNullOrWhiteSpace(fullName) == true)
+        if (string.IsNullOrWhiteSpace(fullName))
         {
             throw new ArgumentException("Наименование типа средства измерений не может быть пустым", nameof(fullName));
         }
 
-        if (string.IsNullOrWhiteSpace(verificationMethodName) == true)
+        if (string.IsNullOrWhiteSpace(verificationMethodName))
         {
             throw new ArgumentException("Наименование методики поверки не может быть пустым", nameof(verificationMethodName)); 
         }

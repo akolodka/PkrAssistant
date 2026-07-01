@@ -1,4 +1,4 @@
-﻿using PkrAssistant.Application.ProtocolAssembly.Validation;
+using PkrAssistant.Application.ProtocolAssembly.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,7 +29,7 @@ public class ProtocolAssemblyService : IProtocolAssemblyService
     {
         IProtocolAssemblyValidator validator = new ProtocolAssemblyRequestValidator(request);
 
-        if (validator.TryValidate(out var failureAssemblyResult) == false)
+        if (validator.TryValidate(out var failureAssemblyResult) is false)
         {
             return failureAssemblyResult!;
         }
@@ -38,7 +38,7 @@ public class ProtocolAssemblyService : IProtocolAssemblyService
 
         validator = new ProtocolAssemblyPartsValidator(parts, request.TemplatePartIds);
 
-        if (validator.TryValidate(out failureAssemblyResult) == false)
+        if (validator.TryValidate(out failureAssemblyResult) is false)
         {
             return failureAssemblyResult!;
         }

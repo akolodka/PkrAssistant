@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 
 namespace PkrAssistant.Application.ProtocolAssembly.Validation;
 
@@ -16,7 +16,7 @@ public class ProtocolAssemblyRequestValidator : IProtocolAssemblyValidator
 
     public bool TryValidate(out ProtocolAssemblyResult? failureAssemblyResult)
     {
-        if (_request?.TemplatePartIds == null || _request.TemplatePartIds.Any() == false)
+        if (_request?.TemplatePartIds is null || _request.TemplatePartIds.Any() is false)
         {
             failureAssemblyResult = ProtocolAssemblyResult.Failure("Запрос не содержит идентификаторы частей шаблона.");
             return false;

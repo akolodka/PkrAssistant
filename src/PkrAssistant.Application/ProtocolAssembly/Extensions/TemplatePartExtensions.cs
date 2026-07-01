@@ -1,4 +1,4 @@
-﻿using PkrAssistant.Application.Templates;
+using PkrAssistant.Application.Templates;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ namespace PkrAssistant.Application.Extensions;
 /// </summary>
 public static class TemplatePartExtensions
 {
-    private static readonly HashSet<string> AllowedExtensions = new (
+    private static readonly HashSet<string> _allowedExtensions = new (
         new[] { ".xlsx", ".docx" },
         StringComparer.OrdinalIgnoreCase);
 
@@ -19,14 +19,15 @@ public static class TemplatePartExtensions
     /// </summary>
     public static bool HasValidExtension(this TemplatePart part)
     {
-
-        if (string.IsNullOrWhiteSpace(part.FileName) == true)
+        if (string.IsNullOrWhiteSpace(part.FileName))
         {
             return false;
         }
 
         var extension = Path.GetExtension(part.FileName);
 
-        return AllowedExtensions.Contains(extension);
+        var hasValidExtension = _allowedExtensions.Contains(extension);
+
+        return hasValidExtension;
     }
 }

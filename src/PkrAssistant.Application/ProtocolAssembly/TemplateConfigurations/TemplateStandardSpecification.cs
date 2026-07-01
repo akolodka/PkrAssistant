@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.TemplateConfigurations;
 
@@ -53,7 +53,7 @@ public class TemplateStandardSpecification
             throw new ArgumentException("Порядковый номер в шаблоне должен быть в диапазоне от 1 до 10", nameof(orderIndex));
         }
 
-        if (preferredStandardId.HasValue == true && preferredStandardId.Value == Guid.Empty)
+        if (preferredStandardId.HasValue && preferredStandardId.Value == Guid.Empty)
         {
             throw new ArgumentException("Идентификатор предпочитаемого эталона единицы величины должен быть указан", nameof(preferredStandardId));
         }

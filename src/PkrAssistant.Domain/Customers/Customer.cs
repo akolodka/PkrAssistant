@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -45,25 +45,25 @@ public class Customer
         string legalAddress,
         string? fullname = null)
     {
-        if (string.IsNullOrWhiteSpace(shortName) == true)
+        if (string.IsNullOrWhiteSpace(shortName))
         {
             throw new ArgumentException("Сокращённое наименование заказчика не может быть пустым", nameof(shortName));
         }
 
         var cleanInn = inn.Trim()
-                          .Replace(" ", string.Empty);
+            .Replace(" ", string.Empty);
 
-        if (IsInnValid(cleanInn) == false)
+        if (IsInnValid(cleanInn))
         {
             throw new ArgumentException("ИНН должен содержать 10 или 12 цифр", nameof(inn));
         }
 
-        if (string.IsNullOrWhiteSpace(legalAddress) == true)
+        if (string.IsNullOrWhiteSpace(legalAddress))
         {
             throw new ArgumentException("Юридический адрес заказчика не может быть пустым", nameof(legalAddress));
         }
 
-        if (string.IsNullOrWhiteSpace(fullname) == true)
+        if (string.IsNullOrWhiteSpace(fullname))
         {
             fullname = shortName;
         }
@@ -71,7 +71,7 @@ public class Customer
         Id = Guid.NewGuid();
         ShortName = shortName.Trim();
 
-        FullName = (string.IsNullOrWhiteSpace(fullname) == true)
+        FullName = string.IsNullOrWhiteSpace(fullname)
             ? shortName.Trim()  
             : fullname.Trim();
 
@@ -88,19 +88,11 @@ public class Customer
     /// <returns>True, если формат корректен.</returns>
     private static bool IsInnValid(string inn)
     {
-        if (inn.All(char.IsDigit) == false)
-        {
-            return false;
-        }
+        var hasOnlyDigits = inn.All(char.IsDigit);
 
         var hasValidLength = (inn.Length == 10) || (inn.Length == 12);
 
-        if (hasValidLength == false)
-        {
-            return false;
-        }
-
-        return true;
+        return hasOnlyDigits && hasValidLength;
     }
 
     public void AddContactPerson(ContactPerson contactPerson)

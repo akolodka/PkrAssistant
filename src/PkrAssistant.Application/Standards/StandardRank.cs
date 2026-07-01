@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.Standards;
 
@@ -19,7 +19,7 @@ public class StandardRank
 
     public StandardRank(string name)
     {
-        if (string.IsNullOrWhiteSpace(name) == true)
+        if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException("Наименование разряда эталона не может быть пустым", nameof(name));
         }

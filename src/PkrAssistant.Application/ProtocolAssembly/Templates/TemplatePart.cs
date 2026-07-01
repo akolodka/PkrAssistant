@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.Templates;
 
@@ -38,12 +38,12 @@ public abstract class TemplatePart
         byte[] fileContent, 
         Guid departmentId)
     {
-        if (string.IsNullOrWhiteSpace(fileName) == true)
+        if (string.IsNullOrWhiteSpace(fileName))
         {
             throw new ArgumentException("Имя файла не может быть пустым", nameof(fileName));
         }
 
-        if (fileContent == null)
+        if (fileContent is null)
         {
            throw new ArgumentNullException(nameof(fileContent), "Файл должен быть загружен");
         }

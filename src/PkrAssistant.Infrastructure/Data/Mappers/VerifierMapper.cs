@@ -8,8 +8,10 @@ internal static class VerifierMapper
     public static Verifier ToDomain(this VerifierEntity entity)
     {
         return new Verifier(
+
             lastName: entity.LastName,
             firstName: entity.FirstName,
+
             position: entity.Position,
             patronymic: entity.Patronymic);
     }
@@ -19,7 +21,6 @@ internal static class VerifierMapper
         return new VerifierEntity
         {
             Id = domain.Id,
-
             LastName = domain.LastName,
 
             FirstName = domain.FirstName,

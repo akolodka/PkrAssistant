@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.Standards;
 
@@ -22,7 +22,9 @@ public class UnitRankCombination
     // Для EF
     private UnitRankCombination() {}
 
-    public UnitRankCombination(Guid unitOfMeasurementId, Guid standardRankId)
+    public UnitRankCombination(
+        Guid unitOfMeasurementId, 
+        Guid standardRankId)
     {
         if (unitOfMeasurementId == Guid.Empty)
         {

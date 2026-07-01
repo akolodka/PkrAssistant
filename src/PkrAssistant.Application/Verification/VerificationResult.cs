@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.Verification;
 
@@ -38,12 +38,12 @@ public class VerificationResult
         bool isPass, 
         int sortOrder)
     {
-        if (string.IsNullOrWhiteSpace(name) == true)
+        if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException("Краткое наименование результата поверки не может быть пустым", nameof(name));
         }
 
-        if (string.IsNullOrWhiteSpace(description) == true)
+        if (string.IsNullOrWhiteSpace(description))
         {
             throw new ArgumentException("Полное описание результата поверки не может быть пустым", nameof(description));
         }

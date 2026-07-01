@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Domain.Personnel;
 
@@ -38,17 +38,17 @@ public class Verifier
         string position, 
         string? patronymic = null)
     {
-        if (string.IsNullOrWhiteSpace(lastName) == true)
+        if (string.IsNullOrWhiteSpace(lastName))
         {
             throw new ArgumentException("Фамилия не может быть пустой", nameof(lastName));
         }
 
-        if (string.IsNullOrWhiteSpace(firstName) == true)
+        if (string.IsNullOrWhiteSpace(firstName))
         {
             throw new ArgumentException("Имя не может быть пустым", nameof(firstName));
         }
 
-        if (string.IsNullOrWhiteSpace(position) == true)
+        if (string.IsNullOrWhiteSpace(position))
         {
             throw new ArgumentException("Должность не может быть пустой", nameof(position));   
         }
@@ -58,7 +58,7 @@ public class Verifier
         LastName = lastName.Trim();
         FirstName = firstName.Trim();
 
-        Patronymic = (string.IsNullOrWhiteSpace(patronymic) == true) 
+        Patronymic = string.IsNullOrWhiteSpace(patronymic)
             ? null 
             : patronymic.Trim();
         
@@ -71,11 +71,11 @@ public class Verifier
     public string GetShortName()
     {
         // Защита от будущих изменений валидации или тестовых сценариев
-        var firstNameInitial = (string.IsNullOrWhiteSpace(FirstName) == true) 
+        var firstNameInitial = string.IsNullOrWhiteSpace(FirstName)
             ? string.Empty 
             :  $"{FirstName[0]}.";
 
-        var patronymicInitial = (string.IsNullOrWhiteSpace(Patronymic) == true) 
+        var patronymicInitial = string.IsNullOrWhiteSpace(Patronymic)
             ? string.Empty 
             : $"{Patronymic[0]}.";
 
@@ -87,7 +87,7 @@ public class Verifier
     /// </summary>
     public string GetFullName()
     {
-        var patronymic = (string.IsNullOrWhiteSpace(Patronymic) == true)
+        var patronymic = string.IsNullOrWhiteSpace(Patronymic)
             ? string.Empty
             : Patronymic;
 

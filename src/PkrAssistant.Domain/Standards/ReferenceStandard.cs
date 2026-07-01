@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace PkrAssistant.Domain.Standards;
@@ -62,22 +62,22 @@ public class ReferenceStandard
         Guid standardRankId,
         bool isActive)
     {
-        if (string.IsNullOrWhiteSpace(registrationNumber) == true)
+        if (string.IsNullOrWhiteSpace(registrationNumber))
         {
             throw new ArgumentException("Регистрационный номер не может быть пустым", nameof(registrationNumber));
         }
 
-        if (string.IsNullOrWhiteSpace(name) == true)
+        if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException("Наименование эталона не может быть пустым", nameof(name));
         }
 
-        if (string.IsNullOrWhiteSpace(keywords) == true)
+        if (string.IsNullOrWhiteSpace(keywords))
         {
             throw new ArgumentException("Ключевые слова эталона не могут быть пустыми", nameof(keywords));
         }
 
-        if (string.IsNullOrWhiteSpace(attestationCertificateNumber) == true)
+        if (string.IsNullOrWhiteSpace(attestationCertificateNumber))
         {
             throw new ArgumentException("Номер свидетельства об аттестации эталона не может быть пустым", nameof(attestationCertificateNumber));
         }
@@ -113,7 +113,7 @@ public class ReferenceStandard
     /// <param name="date">Если null, подставляется текущая дата.</param>
     public bool IsAttestationValid(DateOnly? date = null)
     {
-        if (date == null)
+        if (date is null)
         {
             date = DateOnly.FromDateTime(DateTime.Today);
         }
@@ -126,7 +126,7 @@ public class ReferenceStandard
     /// </summary>
     public void AddUnitOfMeasurement(Guid unitOfMeasurementId)
     {
-        if (UnitOfMeasurementIds.Contains(unitOfMeasurementId) == true)
+        if (UnitOfMeasurementIds.Contains(unitOfMeasurementId))
         {
             return;
         }

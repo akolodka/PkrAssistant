@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Application.Instruments;
 
@@ -44,7 +44,7 @@ public class MeasuringInstrument
         string? modificationName = null,
         string? composition = null)
     {
-        if (string.IsNullOrWhiteSpace(serialNumber) == true)
+        if (string.IsNullOrWhiteSpace(serialNumber))
         {
             throw new ArgumentException("Заводской номер не может быть пустым", nameof(serialNumber));
         }
@@ -64,11 +64,11 @@ public class MeasuringInstrument
 
         ApprovedMeasuringInstrumentTypeId = approvedMeasuringInstrumentTypeId;
 
-        ModificationName = (string.IsNullOrWhiteSpace(modificationName) == true) 
+        ModificationName = (string.IsNullOrWhiteSpace(modificationName)) 
             ? null 
             : modificationName.Trim();
 
-        Composition = (string.IsNullOrWhiteSpace(composition) == true)
+        Composition = (string.IsNullOrWhiteSpace(composition))
             ? null
             : composition.Trim();
 
