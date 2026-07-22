@@ -15,5 +15,6 @@ public class AppDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new VerifierConfiguration());
+        modelBuilder.ApplyConfiguration(new ProtocolFormConfiguration());
     }
 }
