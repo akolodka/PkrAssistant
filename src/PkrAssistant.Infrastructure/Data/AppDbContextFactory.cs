@@ -14,7 +14,12 @@ internal sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbCon
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {
-            connectionString = "Host=shub_host;Port=5432;Database=stub_db;Username=stub_user;Password=stub_password";
+            throw new InvalidOperationException(
+                "Переменная окружения DESIGN_TIME_CONNECTION не задана. " +
+                "Задайте её один раз командой: " +
+                "setx DESIGN_TIME_CONNECTION \"Host=localhost;Port=5432;Database=pkrassistant;Username=...;Password=...\" " +
+                "и перезапустите Visual Studio.");
+            ;
         }
 
         var builder = new DbContextOptionsBuilder<AppDbContext>();
