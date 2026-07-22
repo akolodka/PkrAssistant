@@ -1,6 +1,6 @@
 using System;
 
-namespace PkrAssistant.Domain.Entities;
+namespace PkrAssistant.Domain.Protocols;
 
 /// <summary>
 /// Форма протокола поверки для заполнения поверителем.
