@@ -1,7 +1,10 @@
-﻿using System;
+using System;
 
 namespace PkrAssistant.Infrastructure.Data.Entities;
 
+/// <summary>
+/// Persistense-модель поверителя для EF Core
+/// </summary>
 internal class VerifierEntity
 {
     public Guid Id { get; set; }

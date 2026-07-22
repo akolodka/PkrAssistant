@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PkrAssistant.Infrastructure.Data.Entities;
 
 namespace PkrAssistant.Infrastructure.Data.Configurations;
 
+/// <summary>
+/// Конфигурация EF Core сущности VerifierEntity
+/// </summary>
 internal class VerifierConfiguration : IEntityTypeConfiguration<VerifierEntity>
 {
     public void Configure(EntityTypeBuilder<VerifierEntity> builder) 
