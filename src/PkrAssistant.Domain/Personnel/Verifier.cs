@@ -29,9 +29,6 @@ public class Verifier
     /// </summary>
     public string Position { get; private set; }
 
-    // Для EF
-    private Verifier() {}
-
     public Verifier(
         string lastName, 
         string firstName, 
@@ -65,6 +62,34 @@ public class Verifier
         Position = position.Trim();
     }
 
+    // Для маппинга модели при восстановлении из БД
+    private Verifier(
+        Guid id,
+        string lastName,
+        string firstName,
+        string position,
+        string? patronymic)
+    {
+        Id = id;
+
+        LastName = lastName;
+        FirstName = firstName;
+
+        Position = position;
+        Patronymic = patronymic;
+    }
+
+    // Для маппинга модели при восстановлении из БД
+    public static Verifier Reconstruct(
+        Guid id, 
+        string lastName, 
+        string firstName, 
+        string position, 
+        string? patronymic)
+    {
+        return new Verifier(id, lastName, firstName, position, patronymic);
+    }
+
     /// <summary>
     /// Возвращает Фамилию И.О. поверителя.
     /// </summary>
@@ -73,7 +98,7 @@ public class Verifier
         // Защита от будущих изменений валидации или тестовых сценариев
         var firstNameInitial = string.IsNullOrWhiteSpace(FirstName)
             ? string.Empty 
-            :  $"{FirstName[0]}.";
+            : $"{FirstName[0]}.";
 
         var patronymicInitial = string.IsNullOrWhiteSpace(Patronymic)
             ? string.Empty 

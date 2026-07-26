@@ -34,9 +34,6 @@ public class ProtocolForm
     /// </summary>
     public DateTime UpdatedAt { get; private set; }
 
-    // Для EF
-    private ProtocolForm() {}
-
     public ProtocolForm(
         string name, 
         Guid templateFileId)
@@ -59,6 +56,38 @@ public class ProtocolForm
 
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
+    }
+
+    // Для маппинга модели при восстановлении из БД
+    private ProtocolForm(
+        Guid id,
+        string name,
+        Guid templateFileId,
+        bool isActive,
+        DateTime createdAt,
+        DateTime updatedAt) 
+    {
+        Id = id;
+
+        Name = name;
+        TemplateFileId = templateFileId;
+
+        IsActive = isActive;
+
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
+    }
+
+    // Для маппинга модели при восстановлении из БД
+    public static ProtocolForm Reconstruct(
+        Guid id,
+        string name,
+        Guid templateFileId,
+        bool isActive,
+        DateTime createdAt,
+        DateTime updatedAt)
+    {
+        return new ProtocolForm(id, name, templateFileId, isActive, createdAt, updatedAt);
     }
 
     /// <summary>

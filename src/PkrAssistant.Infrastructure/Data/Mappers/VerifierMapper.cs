@@ -7,7 +7,9 @@ internal static class VerifierMapper
 {
     public static Verifier ToDomain(this VerifierEntity entity)
     {
-        return new Verifier(
+        return Verifier.Reconstruct(
+
+            id: entity.Id,
 
             lastName: entity.LastName,
             firstName: entity.FirstName,

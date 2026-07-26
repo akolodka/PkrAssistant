@@ -7,9 +7,17 @@ internal static class ProtocolFormMapper
 {
     public static ProtocolForm ToDomain(this ProtocolFormEntity entity)
     {
-        return new ProtocolForm(
+        return ProtocolForm.Reconstruct(
+            
+            id: entity.Id, 
+            
             name: entity.Name, 
-            templateFileId: entity.TemplateFileId);
+            templateFileId: entity.TemplateFileId,
+
+            isActive: entity.IsActive,
+
+            createdAt: entity.CreatedAt,
+            updatedAt: entity.UpdatedAt);
     }
 
     public static ProtocolFormEntity ToEntity(this ProtocolForm domain)
