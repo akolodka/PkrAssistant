@@ -3,7 +3,7 @@ using System;
 namespace PkrAssistant.Infrastructure.Data.Entities;
 
 /// <summary>
-/// Persistense-модель поверителя для EF Core
+/// Persistence-модель поверителя для EF Core
 /// </summary>
 internal class VerifierEntity
 {

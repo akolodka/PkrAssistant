@@ -3,7 +3,7 @@ using System;
 namespace PkrAssistant.Infrastructure.Data.Entities;
 
 /// <summary>
-/// Persistense-модель формы протокола поверки для EF Core
+/// Persistence-модель формы протокола поверки для EF Core
 /// </summary>
 internal class ProtocolFormEntity
 {

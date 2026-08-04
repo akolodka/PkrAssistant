@@ -7,27 +7,27 @@ namespace PkrAssistant.Domain.Personnel;
 /// </summary>
 public class Verifier
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
     /// <summary>
     /// Фамилия.
     /// </summary>
-    public string LastName { get; private set; }
+    public string LastName { get; }
 
     /// <summary>
     /// Имя.
     /// </summary>
-    public string FirstName { get; private set; }
+    public string FirstName { get; }
 
     /// <summary>
     /// Отчество (при наличии).
     /// </summary>
-    public string? Patronymic {  get; private set; }
+    public string? Patronymic {  get; }
 
     /// <summary>
     /// Должность.
     /// </summary>
-    public string Position { get; private set; }
+    public string Position { get; }
 
     public Verifier(
         string lastName, 
@@ -80,7 +80,7 @@ public class Verifier
     }
 
     // Для маппинга модели при восстановлении из БД
-    public static Verifier Reconstruct(
+    public static Verifier FromPersistence(
         Guid id, 
         string lastName, 
         string firstName, 

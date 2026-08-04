@@ -7,17 +7,17 @@ namespace PkrAssistant.Domain.Protocols;
 /// </summary>
 public class ProtocolForm 
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
     /// <summary>
     /// Наименование формы протокола поверки.
     /// </summary>
-    public string Name { get; private set; } = string.Empty;
+    public string Name { get; } = string.Empty;
 
     /// <summary>
     /// Идентификатор файла шаблона поверки.
     /// </summary>
-    public Guid TemplateFileId { get; private set; }
+    public Guid TemplateFileId { get; }
 
     /// <summary>
     /// Флаг состояния доступности формы протокола для работы.
@@ -27,7 +27,7 @@ public class ProtocolForm
     /// <summary>
     /// Дата создания формы протокола поверки.
     /// </summary>
-    public DateTime CreatedAt { get; private set; }
+    public DateTime CreatedAt { get; }
 
     /// <summary>
     /// Дата изменения формы протокола поверки.
@@ -79,7 +79,7 @@ public class ProtocolForm
     }
 
     // Для маппинга модели при восстановлении из БД
-    public static ProtocolForm Reconstruct(
+    public static ProtocolForm FromPersistence(
         Guid id,
         string name,
         Guid templateFileId,

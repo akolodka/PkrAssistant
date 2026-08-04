@@ -7,7 +7,7 @@ internal static class ProtocolFormMapper
 {
     public static ProtocolForm ToDomain(this ProtocolFormEntity entity)
     {
-        return ProtocolForm.Reconstruct(
+        return ProtocolForm.FromPersistence(
             
             id: entity.Id, 
             
