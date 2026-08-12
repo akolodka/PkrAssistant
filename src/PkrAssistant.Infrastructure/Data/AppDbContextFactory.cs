@@ -1,24 +1,44 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace PkrAssistant.Infrastructure.Data;
 
 internal sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
 {
+    private readonly string DefaultConnectionName = "DefaultConnection";
+
+    private readonly string EnvironmentVariableName = "DESIGN_TIME_CONNECTION";
+
     public AppDbContext CreateDbContext(string[] args)
     {
-        // попытка прочитать настоящую строку подклюения из среды окружения,
-        // строка будет передана через терминал
-        var connectionString = Environment.GetEnvironmentVariable("DESIGN_TIME_CONNECTION");
+        var configuration = new ConfigurationBuilder()
+
+            // указание на тип текущей сборки для поиска Guid секретов
+            .AddUserSecrets<AppDbContextFactory>(optional: true)
+
+            .AddEnvironmentVariables()
+            .Build();
+
+        var connectionString = configuration.GetConnectionString(DefaultConnectionName);
+
+        // попытка прочитать настоящую строку подключения из среды окружения,
+        // строка может быть передана через терминал
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            connectionString = Environment.GetEnvironmentVariable(EnvironmentVariableName);
+        }
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {
             throw new InvalidOperationException(
-                "Переменная окружения DESIGN_TIME_CONNECTION не задана. " +
-                "Задайте её один раз командой: " +
-                "setx DESIGN_TIME_CONNECTION \"Host=localhost;Port=5432;Database=pkrassistant;Username=...;Password=...\" " +
-                "и перезапустите Visual Studio.");
+                $"Connection string не найдена. " +
+                $"Задайте её одним из способов:\n" +
+                $"1. User Secrets (рекомендуется):\n" +
+                $"   dotnet user-secrets set \"ConnectionStrings:{DefaultConnectionName}\" \"your_connection_string\" --project src/PkrAssistant.Infrastructure/PkrAssistant.Infrastructure.csproj\n" +
+                $"2. Environment variable:\n" +
+                $"   setx {EnvironmentVariableName} \"your_connection_string\"");
             ;
         }
 
