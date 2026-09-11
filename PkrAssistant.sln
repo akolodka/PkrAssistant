@@ -19,13 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PkrAssistant.Application.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PkrAssistant.Infrastructure.Tests", "tests\PkrAssistant.Infrastructure.Tests\PkrAssistant.Infrastructure.Tests.csproj", "{139CAFBD-E626-4612-A61B-7C3C53138FB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PkrAssistant.Domain.Tests", "PkrAssistant.Domain.Tests\PkrAssistant.Domain.Tests.csproj", "{EB16FFC9-F125-49EB-A09B-A6BA9D75CC08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{07344BD2-CDDA-42FA-908C-88E880723F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -52,6 +51,13 @@ Global
 		{139CAFBD-E626-4612-A61B-7C3C53138FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{139CAFBD-E626-4612-A61B-7C3C53138FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{139CAFBD-E626-4612-A61B-7C3C53138FB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB16FFC9-F125-49EB-A09B-A6BA9D75CC08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB16FFC9-F125-49EB-A09B-A6BA9D75CC08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB16FFC9-F125-49EB-A09B-A6BA9D75CC08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB16FFC9-F125-49EB-A09B-A6BA9D75CC08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{07344BD2-CDDA-42FA-908C-88E880723F66} = {BA0EDD04-717E-452B-A1E0-CC79402B9C1B}
@@ -60,5 +66,9 @@ Global
 		{7073473D-A766-484F-A746-516DDC1F98F5} = {BA0EDD04-717E-452B-A1E0-CC79402B9C1B}
 		{BFFEBAAE-D2E8-4B8B-A214-571289259712} = {3D14626D-B9D1-49BD-BF47-DCBB38120EAD}
 		{139CAFBD-E626-4612-A61B-7C3C53138FB7} = {3D14626D-B9D1-49BD-BF47-DCBB38120EAD}
+		{EB16FFC9-F125-49EB-A09B-A6BA9D75CC08} = {3D14626D-B9D1-49BD-BF47-DCBB38120EAD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1EB416A-0C2C-4FAF-93A2-E56015467DFF}
 	EndGlobalSection
 EndGlobal
