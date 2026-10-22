@@ -9,6 +9,9 @@ public static class SwaggerConfiguration
 {
     public static IServiceCollection AddSwaggerConfiguration(this IServiceCollection services)
     {
+        // согласно рекомендациям Microsoft идёт ранее AddSwaggerGen
+        services.AddEndpointsApiExplorer();
+
         services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo
