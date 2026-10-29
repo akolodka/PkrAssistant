@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace PkrAssistant.Api.Middleware;
 
-internal class RequestTimingMiddeware
+internal class RequestTimingMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<RequestTimingMiddeware> _logger;
+    private readonly ILogger<RequestTimingMiddleware> _logger;
 
-    public RequestTimingMiddeware(
+    public RequestTimingMiddleware(
         RequestDelegate next, 
-        ILogger<RequestTimingMiddeware> logger)
+        ILogger<RequestTimingMiddleware> logger)
     {
         _next = next;
         _logger = logger;
@@ -25,14 +25,19 @@ internal class RequestTimingMiddeware
         await _next(context);
 
         var elapsed = timer.Elapsed;
+        var statusCode = context.Response.StatusCode;
 
         var method = context.Request.Method;
         var path = context.Request.Path;
 
-        _logger.Log(
-            LogLevel.Information, 
-            "Метод запроса: {Method}, путь запроса: {Path}, затрачено времени: {Elapsed}", 
-            method, path, elapsed);
+        _logger.LogInformation("""
+            {Method} => "{Path}" returns {StatusCode}, elapsed {Elapsed} 
+            
+            """, 
+            method, 
+            path, 
+            statusCode,
+            elapsed);
 
     }
 }
