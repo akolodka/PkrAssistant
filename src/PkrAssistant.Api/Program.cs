@@ -6,6 +6,7 @@ using PkrAssistant.Api.Extensions;
 using PkrAssistant.Api.Middleware;
 using PkrAssistant.Infrastructure;
 using System;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,11 +22,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<RequestTimingMiddeware>();
+app.UseMiddleware<RequestTimingMiddleware>();
 
 app.MapGet("/timing", (ILogger<Program> logger) =>
 {
-    logger.LogInformation("Вызван эндпоинт /timing в {Time}", DateTime.UtcNow);
+    logger.LogInformation("""
+        GET => "/timing" at {Time}
+        
+        """, 
+        DateTime.UtcNow.AsRuTime());
 });
 
 app.Run();
