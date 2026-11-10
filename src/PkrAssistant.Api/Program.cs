@@ -1,12 +1,9 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using PkrAssistant.Api.Endpoints;
 using PkrAssistant.Api.Extensions;
 using PkrAssistant.Api.Middleware;
 using PkrAssistant.Infrastructure;
-using System;
-using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,17 +17,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.MapUtcEndpoint();
 }
 
 app.UseMiddleware<RequestTimingMiddleware>();
-
-app.MapGet("/timing", (ILogger<Program> logger) =>
-{
-    logger.LogInformation("""
-        GET => "/timing" at {Time}
-        
-        """, 
-        DateTime.UtcNow.AsRuTime());
-});
 
 app.Run();
