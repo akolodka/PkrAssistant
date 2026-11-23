@@ -21,6 +21,8 @@ if (app.Environment.IsDevelopment())
     app.MapUtcEndpoint();
 }
 
+app.MapExcelEndpoint();
+
 app.UseMiddleware<RequestTimingMiddleware>();
 
 app.Run();

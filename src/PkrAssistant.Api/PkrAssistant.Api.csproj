@@ -27,4 +27,14 @@
     <ProjectReference Include="..\PkrAssistant.Infrastructure\PkrAssistant.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TEMP\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TEMP\example.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
